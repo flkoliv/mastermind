@@ -29,9 +29,6 @@ public class PlateauMaster extends JPanel implements Plateau {
 	private JPanel resultat;
 	private JPanel boutons;
 	private JPanel boutonsCouleur;
-	// String[][] tab = { { "", "" }, { "01235", "==--" }, { "01235", "--=--" }, {
-	// "01235", "==--" }, { "01235", "==-" } , { "01235", "==--" }, { "01235",
-	// "==--" }, { "01235", "==--" }, { "01235", "==--" }, { "01235", "==--" }};
 	String[][] tab;
 
 	private int emptyRow;
@@ -44,7 +41,7 @@ public class PlateauMaster extends JPanel implements Plateau {
 		this.taille = taille;
 		this.joueur = j;
 		this.longueurCode = longueurCode;
-		this.tab = j.getTableauMaster();
+		this.tab = j.getTableauJeu();
 		boutons = new JPanel();
 		boutons.setLayout(new BoxLayout(boutons, BoxLayout.LINE_AXIS));
 		okButton = new JButton("OK");
@@ -215,7 +212,7 @@ public class PlateauMaster extends JPanel implements Plateau {
 	public void valider() {
 		if (tab[emptyRow][0].length() == longueurCode) {
 
-			joueur.setTableaMaster(tab);
+			joueur.setTableaJeu(tab);
 			emptyRow++;
 
 		}

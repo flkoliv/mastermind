@@ -31,76 +31,41 @@ public abstract class Joueur extends Observable implements Observer {
 	protected String codeATrouver = "";
 	protected int toursRestants = 0;
 	protected boolean gagnant = false;
-	protected String[][] tableauMaster;
+	protected String[][] tableauJeu;
 	
 	
 	public Joueur() {
 
 	}
 
-	public void commencer(ModeJeu m) {
-		typeJeu = TypeJeu.PLUSOUMOINS;
-		gagnant = false;
-		adversaire.gagnant = false;
-		adversaire.resultat = "";
-		resultat = "";
-		toursRestants = Options.getInstance().getNbrEssaisPlus();
-		adversaire.toursRestants = Options.getInstance().getNbrEssaisPlus();
-		modeJeu = m;
-		adversaire.modeJeu = m;
-		proposition = "";
-		adversaire.proposition = "";
-
+	public void commencer(TypeJeu t,ModeJeu m) {
+		typeJeu = adversaire.typeJeu = t;
+		modeJeu = adversaire.modeJeu = m;
+		gagnant = adversaire.gagnant = false;
+		resultat = adversaire.resultat = "";
+		proposition = adversaire.proposition = "";
+		if (typeJeu == TypeJeu.MASTERMIND) {
+			tableauJeu=new String[Options.getInstance().getNbrEssaisMaster()][Options.getInstance().getlongueurCodeMaster()];
+			toursRestants = adversaire.toursRestants = Options.getInstance().getNbrEssaisMaster();
+		}else if (typeJeu == TypeJeu.PLUSOUMOINS) {
+			tableauJeu=new String[Options.getInstance().getNbrEssaisPlus()][Options.getInstance().getlongueurCodePlus()];
+			toursRestants = adversaire.toursRestants =Options.getInstance().getNbrEssaisPlus();	
+		}
 		initGraphique();
 		if (m == ModeJeu.DUEL) {
 			creerNouveauCode();
-
 		}
 		adversaire.creerNouveauCode();
 		if (Options.getInstance().getDev()) {
 			plateau.setMsgDev(adversaire.codeATrouver);
 			if (m == ModeJeu.DUEL) {
 				adversaire.plateau.setMsgDev(codeATrouver);
-
 			}
-
 		}
-
 		chercherNouveauCode();
 	}
 
-	public void commencerMaster(ModeJeu t) {
-		typeJeu = TypeJeu.MASTERMIND;
-		adversaire.typeJeu = TypeJeu.MASTERMIND;
-		gagnant = false;
-		adversaire.gagnant = false;
-		adversaire.resultat = "";
-		resultat = "";
-		toursRestants = Options.getInstance().getNbrEssaisMaster();
-		adversaire.toursRestants = Options.getInstance().getNbrEssaisMaster();
-		modeJeu = t;
-		adversaire.modeJeu = t;
-		proposition = "";
-		adversaire.proposition = "";
-		tableauMaster=new String[Options.getInstance().getNbrEssaisMaster()][Options.getInstance().getlongueurCodeMaster()];
-		
-		initGraphique();
-		if (t == ModeJeu.DUEL) {
-			creerNouveauCode();
-		}
-		adversaire.creerNouveauCode();
-		if (Options.getInstance().getDev()) {
-			plateau.setMsgDev(adversaire.codeATrouver);
-			if (t == ModeJeu.DUEL) {
-				adversaire.plateau.setMsgDev(codeATrouver);
-
-			}
-
-		}
-
-		chercherNouveauCode();
-	}
-
+	
 	protected abstract void chercherNouveauCode();
 
 	public Plateau getPlateau() {
@@ -120,7 +85,7 @@ public abstract class Joueur extends Observable implements Observer {
 		notifyObservers(proposition);
 	}
 
-	public String construireReponse(String code) {
+	public String construireReponsePlus(String code) {
 		String result = "";
 		for (int i = 0; i < codeATrouver.length(); i++) {
 			int j = codeATrouver.charAt(i);
@@ -136,19 +101,38 @@ public abstract class Joueur extends Observable implements Observer {
 		return result;
 
 	}
+	
+	public String construireReponseMaster(String code) {
+		String result = "";
+		for (int i = 0; i < code.length(); i++) {
+			if (code.charAt(i)==codeATrouver.charAt(i)) {
+				result=result+"=";
+			}else {
+				for (int j = 0; j < code.length(); j++) {
+					if (code.charAt(i)==codeATrouver.charAt(j)) {
+						result=result+"-";
+					}
+				}
+			}
+		}
+		return result;
+	}
 
 	public void update(Observable arg0, Object arg1) {
 		String prop = (String) arg1;
 		if (codeATrouver.equals(prop)) {
 			adversaire.aGagne();
 		}
-		adversaire.setResult(construireReponse(prop));
+		if (typeJeu==TypeJeu.PLUSOUMOINS) {
+			adversaire.setResult(construireReponsePlus(prop));
+		}else if (typeJeu==TypeJeu.MASTERMIND) {
+			adversaire.setResult(construireReponseMaster(prop));
+		}
 
 	}
 
 	public void setResult(String reponse) {
 		toursRestants--;
-		System.out.println(this.getClass() + " " + toursRestants);
 		resultat = reponse;
 		plateau.setResult(proposition, resultat);
 		if (modeJeu == ModeJeu.DUEL) {
@@ -256,22 +240,22 @@ public abstract class Joueur extends Observable implements Observer {
 				JOptionPane.QUESTION_MESSAGE);
 		if (o == 0) {
 			if (modeJeu == ModeJeu.DUEL) {
-				adversaire.commencer(modeJeu);// recommencer la partie
+				adversaire.commencer(typeJeu,modeJeu);// recommencer la partie
 			} else {
-				commencer(modeJeu);
+				commencer(typeJeu,modeJeu);
 			}
 		} else {
 			Main.setBackground();
 		}
 	}
 	
-	public String[][] getTableauMaster(){
-		return tableauMaster;
+	public String[][] getTableauJeu(){
+		return tableauJeu;
 		
 	}
 	
-	public void setTableaMaster(String[][] tab) {
-		this.tableauMaster=tab;
+	public void setTableaJeu(String[][] tab) {
+		this.tableauJeu=tab;
 	}
 	
 }

@@ -18,23 +18,37 @@ public class Ordinateur extends Joueur {
 	 */
 	@Override
 	public void creerNouveauCode() {
-		int nbrChrCode = Options.getInstance().getlongueurCodePlus();
-		double c = Math.random();
-		String code = "";
-		for (int i = 0; i < nbrChrCode; i++) {
-			c = c * 10;
+		if (typeJeu == TypeJeu.PLUSOUMOINS) {
+			int nbrChrCode = Options.getInstance().getlongueurCodePlus();
+
+			double c = Math.random();
+			String code = "";
+			for (int i = 0; i < nbrChrCode; i++) {
+				c = c * 10;
+			}
+			code = String.valueOf((int) c);
+			while (code.length() < nbrChrCode) {
+				code = "0" + code;
+			}
+			logger.debug("Nouveau code Plus ou Moins généré par l'ordinateur : " + code);
+			codeATrouver = code;
+		}else if (typeJeu == TypeJeu.MASTERMIND) {
+			
+			String code="";
+			int nbrChrCode = Options.getInstance().getlongueurCodeMaster();
+			int nbrCouleurs = Options.getInstance().getNbrCouleursMaster();
+			do {
+				Integer c = (int) (Math.random()*10);
+				if (c<nbrCouleurs) {
+					code=code+c;
+				}
+			}while (code.length()<nbrChrCode);
+			codeATrouver = code;
+			logger.debug("Nouveau code Mastermind généré par l'ordinateur : " + code);
 		}
-		code = String.valueOf((int) c);
-		while (code.length() < nbrChrCode) {
-			code = "0" + code;
-		}
-		logger.debug("Nouveau code généré par l'ordinateur : " + code);
-		codeATrouver = code;
+		
+		
 	}
-
-	
-
-	
 
 	/**
 	 * créer un nouveau code en fonction des réponses précédentes
@@ -68,8 +82,8 @@ public class Ordinateur extends Joueur {
 					for (int i = 0; i < Options.getInstance().getlongueurCodePlus(); i++) {
 						s = s + ((rechercheCode[i][0] + rechercheCode[i][1]) / 2);
 						plateau.setProposition(s);
-						//plateau.validate();
-						//plateau.repaint();
+						// plateau.validate();
+						// plateau.repaint();
 						Thread.sleep(200);
 					}
 				} catch (InterruptedException e) {

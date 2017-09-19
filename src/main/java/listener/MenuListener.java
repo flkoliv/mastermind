@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import ihm.Main;
 import ihm.OptionsDialogBox;
 import joueurs.ModeJeu;
+import joueurs.TypeJeu;
 
 /**
  * @author flkoliv
@@ -32,22 +33,22 @@ public class MenuListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		switch (((JMenuItem) e.getSource()).getName()) {
 		case "challengerPlus":
-			fenetre.getJoueur1().commencer(ModeJeu.CHALLENGER);
+			fenetre.getJoueur1().commencer(TypeJeu.PLUSOUMOINS,ModeJeu.CHALLENGER);
 			break;
 		case "defenseurPlus":
-			fenetre.getJoueur2().commencer(ModeJeu.DEFENSEUR);
+			fenetre.getJoueur2().commencer(TypeJeu.PLUSOUMOINS,ModeJeu.DEFENSEUR);
 			break;
 		case "duelPlus":
-			fenetre.getJoueur1().commencer(ModeJeu.DUEL);
+			fenetre.getJoueur1().commencer(TypeJeu.PLUSOUMOINS,ModeJeu.DUEL);
 			break;
 		case "challengerMaster":
-			fenetre.getJoueur1().commencerMaster(ModeJeu.CHALLENGER);
+			fenetre.getJoueur1().commencer(TypeJeu.MASTERMIND,ModeJeu.CHALLENGER);
 			break;
 		case "defenseurMaster":
-			fenetre.getJoueur1().commencerMaster(ModeJeu.DEFENSEUR);
+			fenetre.getJoueur2().commencer(TypeJeu.MASTERMIND,ModeJeu.DEFENSEUR);
 			break;
 		case "duelMaster":
-			fenetre.getJoueur1().commencerMaster(ModeJeu.DUEL);
+			fenetre.getJoueur1().commencer(TypeJeu.MASTERMIND,ModeJeu.DUEL);
 			break;
 		case "options":
 			new OptionsDialogBox(null, "Options", true);
