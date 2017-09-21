@@ -2,10 +2,10 @@ package ihm;
 
 public interface Plateau {
 
-	public void setMsgDev(String msg);
-	public String getProposition();
+	public void setMsgDev(String msg); //afficher le code chercher
 	public void cleanProposition();
-	public void setResult(String code, String result);
+	public void setValues(String[][] results); 
 	public void setProposition(String string);
-
+	public void validerSaisie();
+	public void actualiserAffichage();
 }

@@ -48,7 +48,6 @@ public class ChoixCouleurListener implements MouseListener {
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		System.out.println(((JLabel)arg0.getSource()).getName());
 		if (plateau!=null) {
 			plateau.ajouter(((JLabel)arg0.getSource()).getName());
 		}

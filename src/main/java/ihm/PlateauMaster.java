@@ -29,19 +29,16 @@ public class PlateauMaster extends JPanel implements Plateau {
 	private JPanel resultat;
 	private JPanel boutons;
 	private JPanel boutonsCouleur;
-	String[][] tab;
+	private String[][] tableauJeu;
 
 	private int emptyRow;
-	private int emptyColumn;
 
 	public PlateauMaster(int taille, int longueurCode, Joueur j) {
-
 		this.emptyRow = 0;
-		this.emptyColumn = 0;
 		this.taille = taille;
 		this.joueur = j;
 		this.longueurCode = longueurCode;
-		this.tab = j.getTableauJeu();
+		this.tableauJeu = j.getTableauJeu();
 		boutons = new JPanel();
 		boutons.setLayout(new BoxLayout(boutons, BoxLayout.LINE_AXIS));
 		okButton = new JButton("OK");
@@ -61,7 +58,7 @@ public class PlateauMaster extends JPanel implements Plateau {
 			boutonsCouleur.add(imageA);
 		}
 		resultat = new JPanel();
-		faireAffichageMaster();
+		actualiserAffichage();
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.add(boutons);
@@ -69,42 +66,16 @@ public class PlateauMaster extends JPanel implements Plateau {
 		this.add(boutonsCouleur);
 		this.add(Box.createRigidArea(new Dimension(0, 20)));
 		this.add(resultat);
-
 	}
 
 	@Override
 	public void setMsgDev(String msg) {
-		// TODO Auto-generated method stub
+		// TODO méthode pour l'affichage de la solution
 
 	}
 
-	@Override
-	public String getProposition() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void cleanProposition() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setResult(String code, String result) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setProposition(String string) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void faireAffichageMaster() {
+	public void actualiserAffichage() {
 		resultat.removeAll();
-		System.out.println(longueurCode + "!!!");
 		double size[][] = new double[2][];
 		size[0] = new double[longueurCode + 1];
 		size[1] = new double[taille];
@@ -117,8 +88,8 @@ public class PlateauMaster extends JPanel implements Plateau {
 		size[0][longueurCode] = longueurCode * 15 / 2;
 
 		resultat.setLayout(new TableLayout(size));
-		for (int i = 0; i < tab.length; i++) {
-			if (tab[i][0] == null || tab[i][0].equals("")) {// s'il n'y a pas de proposition dans le tableau
+		for (int i = 0; i < tableauJeu.length; i++) {
+			if (tableauJeu[i][0] == null || tableauJeu[i][0].equals("")) {// s'il n'y a pas de proposition dans le tableau
 				for (int j = 0; j < longueurCode; j++) {
 					ImageIcon ic = new ImageIcon("src/main/ressources/vide.gif");
 					JLabel x = new JLabel(ic);
@@ -130,10 +101,9 @@ public class PlateauMaster extends JPanel implements Plateau {
 					resultat.add(x, s);
 				}
 			} else { // s'il y a une proposition dans le tableau
-				for (int j = 0; j < tab[i][0].length(); j++) {
+				for (int j = 0; j < tableauJeu[i][0].length(); j++) {
 
-					ImageIcon ic = new ImageIcon("src/main/ressources/" + tab[i][0].charAt(j) + ".png");
-					System.out.println("src/main/ressources/" + tab[i][0].charAt(j) + ".png");
+					ImageIcon ic = new ImageIcon("src/main/ressources/" + tableauJeu[i][0].charAt(j) + ".png");
 					JLabel x = new JLabel(ic);
 					x.setBackground(Color.decode("0XCCCCCC"));
 					x.setOpaque(true);
@@ -141,7 +111,7 @@ public class PlateauMaster extends JPanel implements Plateau {
 					String s = j + "," + i;
 					resultat.add(x, s);
 				}
-				for (int j = tab[i][0].length(); j < longueurCode; j++) {
+				for (int j = tableauJeu[i][0].length(); j < longueurCode; j++) {
 
 					ImageIcon ic = new ImageIcon("src/main/ressources/vide.gif");
 					JLabel x = new JLabel(ic);
@@ -155,20 +125,19 @@ public class PlateauMaster extends JPanel implements Plateau {
 			JPanel result = new JPanel();
 			result.setLayout(new GridLayout(2, Math.round(longueurCode / 2)));
 			for (int j = 0; j < longueurCode; j++) {
-				if (tab[i][1] == null || tab[i][1].equals("") || j >= tab[i][1].length()) {
+				if (tableauJeu[i][1] == null || tableauJeu[i][1].equals("") || j >= tableauJeu[i][1].length()) {
 					ImageIcon ic = new ImageIcon("src/main/ressources/vide15.gif");
 					JLabel x = new JLabel(ic);
-
 					result.add(x);
-				} else if (j < tab[i][1].length()) {
+				} else if (j < tableauJeu[i][1].length()) {
 
-					if (tab[i][1].charAt(j) == '=') {
+					if (tableauJeu[i][1].charAt(j) == '=') {
 						ImageIcon ic = new ImageIcon("src/main/ressources/noir.png");
 						JLabel x = new JLabel(ic);
 						x.setBackground(Color.decode("0XCCCCCC"));
 						x.setOpaque(true);
 						result.add(x);
-					} else if (tab[i][1].charAt(j) == '-') {
+					} else if (tableauJeu[i][1].charAt(j) == '-') {
 						ImageIcon ic = new ImageIcon("src/main/ressources/blanc.png");
 						JLabel x = new JLabel(ic);
 						x.setBackground(Color.decode("0XCCCCCC"));
@@ -186,36 +155,51 @@ public class PlateauMaster extends JPanel implements Plateau {
 			String str = longueurCode + "," + i;
 			resultat.add(result, str);
 		}
-		resultat.repaint();
 		resultat.validate();
 	}
 
-	public void ajouter(String name) {
-
-		if (tab[emptyRow][0] == null) {
-
-			tab[emptyRow][0] = "";
+	public void ajouter(String name) {// ajoute une couleur au tableau lors d'un clic
+		if (tableauJeu[emptyRow][0] == null) {
+			tableauJeu[emptyRow][0] = "";
 		}
-
-		if (tab[emptyRow][0].length() < longueurCode) {
-			tab[emptyRow][0] = tab[emptyRow][0] + name;
-			faireAffichageMaster();
+		if (tableauJeu[emptyRow][0].length() < longueurCode) {
+			tableauJeu[emptyRow][0] = tableauJeu[emptyRow][0] + name;
+			actualiserAffichage();
 		}
 	}
-
-	public void effacerLigne() {
-		tab[emptyRow][0] = "";
-		faireAffichageMaster();
+	
+	
+	@Override
+	public void cleanProposition() {
+		tableauJeu[emptyRow][0] = "";
+		actualiserAffichage();
 
 	}
-
-	public void valider() {
-		if (tab[emptyRow][0].length() == longueurCode) {
-
-			joueur.setTableaJeu(tab);
+	
+	
+	@Override
+	public void validerSaisie() {
+		if (tableauJeu[emptyRow][0].length() == longueurCode) {
 			emptyRow++;
-
+			joueur.setTableauJeu(tableauJeu);
+			joueur.faireProposition();
+			
 		}
+	}
+
+	@Override
+	public void setValues(String[][] results) {
+		tableauJeu=results;
+		actualiserAffichage();
+		
+	}
+
+
+	@Override
+	public void setProposition(String string) {
+		tableauJeu[emptyRow][0]=string;
+		actualiserAffichage();
+		
 	}
 
 }

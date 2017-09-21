@@ -45,7 +45,7 @@ public class Humain extends Joueur {
 	}
 
 	@Override
-	protected void chercherNouveauCode() {
+	protected void chercherCode() {
 		// Rien à faire ici... à l'humain de chercher son code et de le taper dans
 		// l'interface
 
@@ -53,8 +53,6 @@ public class Humain extends Joueur {
 
 	public void setCodeAtrouver(String code) {
 		codeATrouver = code;
-		System.out.println(code);
-		
 	}
 
 }
