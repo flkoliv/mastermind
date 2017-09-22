@@ -6,15 +6,15 @@ import javax.swing.JTextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ihm.Options;
-import joueurs.Joueur;
+import ihm.Plateau;
 
 public class EntreeListener implements KeyListener {
 
 	private static final Logger logger = LogManager.getLogger();
-	private Joueur j;
+	private Plateau p;
 
-	public EntreeListener(Joueur j) {
-		this.j=j;
+	public EntreeListener(Plateau p) {
+		this.p=p;
 	}
 	
 	
@@ -30,8 +30,7 @@ public class EntreeListener implements KeyListener {
 				logger.debug("proposition pas assez longue : " + prop);
 			} else {
 				logger.debug("proposition ok");
-				jtf.setText("");
-				j.setProposition(prop);
+				p.validerSaisie();
 			}
 		}
 	}

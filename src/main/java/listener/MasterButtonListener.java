@@ -19,9 +19,9 @@ public class MasterButtonListener implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 
 		if (((JButton) arg0.getSource()).getText().equals("OK")) {
-			plateau.valider();
+			plateau.validerSaisie();
 		}else if (((JButton) arg0.getSource()).getText().equals("Effacer")) {
-			plateau.effacerLigne();
+			plateau.cleanProposition();
 		}
 		// (JButton)arg0.getSource()
 

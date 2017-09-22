@@ -6,17 +6,17 @@ import javax.swing.JTextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ihm.Options;
-import joueurs.Joueur;
+import ihm.Plateau;
 
 public class OkPlateauListener implements ActionListener {
 	private static final Logger logger = LogManager.getLogger();
 
 	private JTextField jtf;
-	private Joueur j;
+	private Plateau p;
 
-	public OkPlateauListener(JTextField jtf, Joueur j) {
+	public OkPlateauListener(JTextField jtf, Plateau p) {
 		this.jtf = jtf;
-		this.j = j;
+		this.p=p;
 	}
 
 	@Override
@@ -27,11 +27,8 @@ public class OkPlateauListener implements ActionListener {
 			jtf.setText("");
 			logger.debug("proposition pas assez longue : " + prop);
 		} else {
-			logger.debug("proposition ok");
-			jtf.setText("");
-			
-			j.setProposition(prop);
-			
+			logger.debug("proposition ok");			
+			p.validerSaisie();	
 		}
 
 	}

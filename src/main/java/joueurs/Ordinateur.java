@@ -54,11 +54,19 @@ public class Ordinateur extends Joueur {
 	 * créer un nouveau code en fonction des réponses précédentes
 	 */
 	@Override
-	public void chercherNouveauCode() {
-		if (!resultat.equals("")) { // si il y a déjà un résultat, mettre à jour le tableau de recherche
-			System.out.println("lastResult = " + resultat);
+	public void chercherCode() {
+		if (typeJeu == TypeJeu.PLUSOUMOINS) {
+			chercherCodePlus();
+		}else if (typeJeu == TypeJeu.MASTERMIND) {
+			chercherCodeMaster();
+		}
+	}
+	
+	private void chercherCodePlus() {
+		if (emptyRowTableauJeu!=0) { // si il y a déjà un résultat, mettre à jour le tableau de recherche
+			String resultat = tableauJeu[emptyRowTableauJeu-1][1];
 			for (int i = 0; i < Options.getInstance().getlongueurCodePlus(); i++) {
-				String c = "" + proposition.charAt(i);
+				String c = "" + tableauJeu[emptyRowTableauJeu-1][0].charAt(i);
 				if (resultat.charAt(i) == '+') {
 					rechercheCode[i][0] = Integer.parseInt(c);
 				} else if (resultat.charAt(i) == '-') {
@@ -82,14 +90,35 @@ public class Ordinateur extends Joueur {
 					for (int i = 0; i < Options.getInstance().getlongueurCodePlus(); i++) {
 						s = s + ((rechercheCode[i][0] + rechercheCode[i][1]) / 2);
 						plateau.setProposition(s);
-						// plateau.validate();
-						// plateau.repaint();
 						Thread.sleep(200);
 					}
+					tableauJeu[emptyRowTableauJeu][0]=s;
+					
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				setProposition(plateau.getProposition());
+				plateau.validerSaisie();
+			}
+		};
+		t.start();
+	}
+	
+	private void chercherCodeMaster() {
+		Thread t = new Thread() { // thread pour l'affichage dans le JTextField et ne pas bloquer l'affichage
+			public void run() {
+				try {
+					String s = "";
+					for (int i = 0; i < Options.getInstance().getlongueurCodeMaster(); i++) {
+						s = s + i;
+						plateau.setProposition(s);
+						Thread.sleep(200);
+					}
+					tableauJeu[emptyRowTableauJeu][0]=s;
+					
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				plateau.validerSaisie();
 			}
 		};
 		t.start();
