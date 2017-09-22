@@ -63,7 +63,7 @@ public class Ordinateur extends Joueur {
 	}
 	
 	private void chercherCodePlus() {
-		if (rechercheCode!=null) { // si il y a déjà un résultat, mettre à jour le tableau de recherche
+		if (emptyRowTableauJeu!=0) { // si il y a déjà un résultat, mettre à jour le tableau de recherche
 			String resultat = tableauJeu[emptyRowTableauJeu-1][1];
 			for (int i = 0; i < Options.getInstance().getlongueurCodePlus(); i++) {
 				String c = "" + tableauJeu[emptyRowTableauJeu-1][0].charAt(i);
