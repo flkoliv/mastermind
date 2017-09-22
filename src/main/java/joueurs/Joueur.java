@@ -63,7 +63,7 @@ public abstract class Joueur extends Observable implements Observer {
 			creerNouveauCode();
 		}
 		adversaire.creerNouveauCode();
-		if (Options.getInstance().getDev()) {
+		if (Options.getInstance().getDev()) {// afficher les code si le mode développeur est selectionné
 			plateau.setMsgDev(adversaire.codeATrouver);
 			if (m == ModeJeu.DUEL) {
 				adversaire.plateau.setMsgDev(codeATrouver);
@@ -95,16 +95,32 @@ public abstract class Joueur extends Observable implements Observer {
 
 	public String construireReponseMaster(String code) {
 		String result = "";
+		boolean[][] tab = new boolean[2][code.length()];
+		for (int i = 0; i < code.length(); i++) {
+			tab[0][i] = true;
+			tab[1][i] = true;
+			
+		}
 		for (int i = 0; i < code.length(); i++) {
 			if (code.charAt(i) == codeATrouver.charAt(i)) {
 				result = result + "=";
-			} else {
+				tab[0][i] = false;
+				tab[1][i] = false;
+			}
+		}
+		for (int i = 0; i < code.length(); i++) {
+			if (tab[0][i]) {
 				for (int j = 0; j < code.length(); j++) {
-					if (code.charAt(i) == codeATrouver.charAt(j)) {
-						result = result + "-";
+					if (tab[1][j]) {
+						if (code.charAt(i) == codeATrouver.charAt(j)) {
+							result = result + "-";
+							tab[1][j] = false;
+
+						}
 					}
 				}
 			}
+			
 		}
 		return result;
 	}

@@ -32,22 +32,20 @@ public class Ordinateur extends Joueur {
 			}
 			logger.debug("Nouveau code Plus ou Moins généré par l'ordinateur : " + code);
 			codeATrouver = code;
-		}else if (typeJeu == TypeJeu.MASTERMIND) {
-			
-			String code="";
+		} else if (typeJeu == TypeJeu.MASTERMIND) {
+			String code = "";
 			int nbrChrCode = Options.getInstance().getlongueurCodeMaster();
 			int nbrCouleurs = Options.getInstance().getNbrCouleursMaster();
 			do {
-				Integer c = (int) (Math.random()*10);
-				if (c<nbrCouleurs) {
-					code=code+c;
+				Integer c = (int) (Math.random() * 10);
+				if (c < nbrCouleurs) {
+					code = code + c;
 				}
-			}while (code.length()<nbrChrCode);
+			} while (code.length() < nbrChrCode);
 			codeATrouver = code;
 			logger.debug("Nouveau code Mastermind généré par l'ordinateur : " + code);
 		}
-		
-		
+
 	}
 
 	/**
@@ -57,16 +55,16 @@ public class Ordinateur extends Joueur {
 	public void chercherCode() {
 		if (typeJeu == TypeJeu.PLUSOUMOINS) {
 			chercherCodePlus();
-		}else if (typeJeu == TypeJeu.MASTERMIND) {
+		} else if (typeJeu == TypeJeu.MASTERMIND) {
 			chercherCodeMaster();
 		}
 	}
-	
+
 	private void chercherCodePlus() {
-		if (emptyRowTableauJeu!=0) { // si il y a déjà un résultat, mettre à jour le tableau de recherche
-			String resultat = tableauJeu[emptyRowTableauJeu-1][1];
+		if (emptyRowTableauJeu != 0) { // si il y a déjà un résultat, mettre à jour le tableau de recherche
+			String resultat = tableauJeu[emptyRowTableauJeu - 1][1];
 			for (int i = 0; i < Options.getInstance().getlongueurCodePlus(); i++) {
-				String c = "" + tableauJeu[emptyRowTableauJeu-1][0].charAt(i);
+				String c = "" + tableauJeu[emptyRowTableauJeu - 1][0].charAt(i);
 				if (resultat.charAt(i) == '+') {
 					rechercheCode[i][0] = Integer.parseInt(c);
 				} else if (resultat.charAt(i) == '-') {
@@ -92,8 +90,8 @@ public class Ordinateur extends Joueur {
 						plateau.setProposition(s);
 						Thread.sleep(200);
 					}
-					tableauJeu[emptyRowTableauJeu][0]=s;
-					
+					tableauJeu[emptyRowTableauJeu][0] = s;
+
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -102,7 +100,7 @@ public class Ordinateur extends Joueur {
 		};
 		t.start();
 	}
-	
+
 	private void chercherCodeMaster() {
 		Thread t = new Thread() { // thread pour l'affichage dans le JTextField et ne pas bloquer l'affichage
 			public void run() {
@@ -113,8 +111,8 @@ public class Ordinateur extends Joueur {
 						plateau.setProposition(s);
 						Thread.sleep(200);
 					}
-					tableauJeu[emptyRowTableauJeu][0]=s;
-					
+					tableauJeu[emptyRowTableauJeu][0] = s;
+
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
