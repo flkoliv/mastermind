@@ -3,6 +3,7 @@ package ihm;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
@@ -43,6 +44,9 @@ public class PlateauMaster extends JPanel implements Plateau {
 		dev = new JPanel();
 		dev.setVisible(false);
 		dev.setLayout(new BoxLayout(dev, BoxLayout.LINE_AXIS));
+		dev.setBorder(BorderFactory.createTitledBorder(
+				BorderFactory.createEtchedBorder(),
+				"Solution",0,0,new Font("Dialog", 1, 12),Color.BLACK));
 		boutons = new JPanel();
 		boutons.setLayout(new BoxLayout(boutons, BoxLayout.LINE_AXIS));
 		okButton = new JButton("OK");
@@ -74,21 +78,27 @@ public class PlateauMaster extends JPanel implements Plateau {
 		this.add(dev);
 	}
 
+	/**
+	 * Affiche la combinaison secrète à des fin de débogage
+	 * @param msg la combinaison à afficher sous forme de chaîne de caractère de valeurs numériques (0-9)
+	 */
 	@Override
 	public void setMsgDev(String msg) {
 		for (int i=0;i<longueurCode;i++) {
 			ImageIcon ic = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/" + msg.charAt(i) + ".png");
 			JLabel x = new JLabel(ic);
-			
 			dev.add(x);
 			dev.setVisible(true);
 		}
 
 	}
 
+	/**
+	 * Actualise l'affichage à chaque changement de proposition ou de réponse
+	 */
 	public void actualiserAffichage() {
 		resultat.removeAll();
-		double size[][] = new double[2][];
+		double size[][] = new double[2][];//créer un tableau de tailles de case pour le TableLayout
 		size[0] = new double[longueurCode + 1];
 		size[1] = new double[taille];
 		for (int i = 0; i < longueurCode; i++) {
@@ -171,7 +181,12 @@ public class PlateauMaster extends JPanel implements Plateau {
 		resultat.validate();
 	}
 
-	public void ajouter(String name) {// ajoute une couleur au tableau lors d'un clic
+	
+	/**
+	 * ajoute une couleur au tableau lors d'un clic
+	 * @param name la couleur sous forme de String (valeur numérique de 0-9)
+	 */
+	public void ajouter(String name) {
 		if (tableauJeu[emptyRow][0] == null) {
 			tableauJeu[emptyRow][0] = "";
 		}
@@ -182,6 +197,9 @@ public class PlateauMaster extends JPanel implements Plateau {
 	}
 
 	@Override
+	/**
+	 * Efface la proposition pour pouvoir en faire une nouvelle (avant validation)
+	 */
 	public void cleanProposition() {
 		tableauJeu[emptyRow][0] = "";
 		actualiserAffichage();
@@ -189,6 +207,9 @@ public class PlateauMaster extends JPanel implements Plateau {
 	}
 
 	@Override
+	/**
+	 * valide la proposition (par l'appui sur le bouton ok du JPanel
+	 */
 	public void validerSaisie() {
 		if (tableauJeu[emptyRow][0].length() == longueurCode) {
 			emptyRow++;
@@ -199,6 +220,10 @@ public class PlateauMaster extends JPanel implements Plateau {
 	}
 
 	@Override
+	/**
+	 * récupère les résultat et actualise l'affichage
+	 * @param results tableau de proposition et de résultats
+	 */
 	public void setValues(String[][] results) {
 		tableauJeu = results;
 		actualiserAffichage();
@@ -206,6 +231,10 @@ public class PlateauMaster extends JPanel implements Plateau {
 	}
 
 	@Override
+	/**
+	 * mettre la proposition dans le tableau de jeu et actualiser l'affichage
+	 * @param string chaîne de caractère représentant la proposition
+	 */
 	public void setProposition(String string) {
 		tableauJeu[emptyRow][0] = string;
 		actualiserAffichage();
