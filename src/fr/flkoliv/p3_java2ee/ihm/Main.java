@@ -24,7 +24,6 @@ public class Main extends JFrame {
 	 */
 	private static final long serialVersionUID = -7364375700141591165L;
 	private static final Logger logger = LogManager.getLogger();
-	private Options options;
 	private Joueur joueur1 = new Humain();
 	private Joueur joueur2 = new Ordinateur();
 	private static Main INSTANCE;
@@ -32,14 +31,13 @@ public class Main extends JFrame {
 	private Main() {
 		logger.info("Lancement programme");
 		joueur1.setAdversaire(joueur2);
-		options = Options.getInstance();
 		this.setTitle("Mettez votre logique à l'épreuve !");
 		this.setSize(600, 600);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ImageIcon img = new ImageIcon("src/main/ressources/mastermind-icon.jpg");
+		ImageIcon img = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/mastermind-icon.jpg");
 		this.setIconImage(img.getImage());
-		ImageIcon icone = new ImageIcon("src/main/ressources/mastermind.png");
+		ImageIcon icone = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/mastermind.png");
 		JLabel image = new JLabel(icone);
 		this.add(image);
 		this.setMinimumSize(new Dimension(620, 700));
@@ -121,7 +119,7 @@ public class Main extends JFrame {
 	}
 
 	public static void setBackground() {
-		ImageIcon icone = new ImageIcon("src/main/ressources/mastermind.png");
+		ImageIcon icone = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/mastermind.png");
 		JLabel image = new JLabel(icone);
 		INSTANCE.getContentPane().removeAll();
 		INSTANCE.getContentPane().add(image);

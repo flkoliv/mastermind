@@ -45,7 +45,7 @@ public class NewCodeBox extends JDialog {
 
 		boutonsCouleur = new JPanel();
 		for (int i = 0; i < Options.getInstance().getNbrCouleursMaster(); i++) {
-			ImageIcon iconeA = new ImageIcon("src/main/ressources/" + i + ".png");
+			ImageIcon iconeA = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/" + i + ".png");
 			JLabel imageA = new JLabel(iconeA);
 			imageA.addMouseListener(new ChoixCouleurListener(this));
 			imageA.setName("" + i);
@@ -65,7 +65,7 @@ public class NewCodeBox extends JDialog {
 	public void addColor(String c) {
 		if (code.length() < Options.getInstance().getlongueurCodeMaster()) {
 			code = code + c;
-			ImageIcon iconeA = new ImageIcon("src/main/ressources/" + c + ".png");
+			ImageIcon iconeA = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/" + c + ".png");
 			JLabel imageA = new JLabel(iconeA);
 			imageA.addMouseListener(new ChoixCouleurListener(this));
 			imageA.setName("" + c);

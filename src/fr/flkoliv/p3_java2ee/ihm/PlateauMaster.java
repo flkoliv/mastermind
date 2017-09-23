@@ -29,6 +29,7 @@ public class PlateauMaster extends JPanel implements Plateau {
 	private JPanel resultat;
 	private JPanel boutons;
 	private JPanel boutonsCouleur;
+	private JPanel dev;
 	private String[][] tableauJeu;
 
 	private int emptyRow;
@@ -39,6 +40,9 @@ public class PlateauMaster extends JPanel implements Plateau {
 		this.joueur = j;
 		this.longueurCode = longueurCode;
 		this.tableauJeu = j.getTableauJeu();
+		dev = new JPanel();
+		dev.setVisible(false);
+		dev.setLayout(new BoxLayout(dev, BoxLayout.LINE_AXIS));
 		boutons = new JPanel();
 		boutons.setLayout(new BoxLayout(boutons, BoxLayout.LINE_AXIS));
 		okButton = new JButton("OK");
@@ -51,7 +55,7 @@ public class PlateauMaster extends JPanel implements Plateau {
 		boutonsCouleur = new JPanel();
 		boutonsCouleur.setLayout(new BoxLayout(boutonsCouleur, BoxLayout.LINE_AXIS));
 		for (int i = 0; i < Options.getInstance().getNbrCouleursMaster(); i++) {
-			ImageIcon iconeA = new ImageIcon("src/main/ressources/" + i + ".png");
+			ImageIcon iconeA = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/" + i + ".png");
 			JLabel imageA = new JLabel(iconeA);
 			imageA.addMouseListener(new ChoixCouleurListener(this));
 			imageA.setName("" + i);
@@ -66,11 +70,19 @@ public class PlateauMaster extends JPanel implements Plateau {
 		this.add(boutonsCouleur);
 		this.add(Box.createRigidArea(new Dimension(0, 20)));
 		this.add(resultat);
+		this.add(Box.createRigidArea(new Dimension(0, 20)));
+		this.add(dev);
 	}
 
 	@Override
 	public void setMsgDev(String msg) {
-		// TODO méthode pour l'affichage de la solution
+		for (int i=0;i<longueurCode;i++) {
+			ImageIcon ic = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/" + msg.charAt(i) + ".png");
+			JLabel x = new JLabel(ic);
+			
+			dev.add(x);
+			dev.setVisible(true);
+		}
 
 	}
 
@@ -89,9 +101,10 @@ public class PlateauMaster extends JPanel implements Plateau {
 
 		resultat.setLayout(new TableLayout(size));
 		for (int i = 0; i < tableauJeu.length; i++) {
-			if (tableauJeu[i][0] == null || tableauJeu[i][0].equals("")) {// s'il n'y a pas de proposition dans le tableau
+			if (tableauJeu[i][0] == null || tableauJeu[i][0].equals("")) {// s'il n'y a pas de proposition dans le
+																			// tableau
 				for (int j = 0; j < longueurCode; j++) {
-					ImageIcon ic = new ImageIcon("src/main/ressources/vide.gif");
+					ImageIcon ic = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/vide.gif");
 					JLabel x = new JLabel(ic);
 
 					x.setBackground(Color.decode("0XCCCCCC"));
@@ -103,7 +116,7 @@ public class PlateauMaster extends JPanel implements Plateau {
 			} else { // s'il y a une proposition dans le tableau
 				for (int j = 0; j < tableauJeu[i][0].length(); j++) {
 
-					ImageIcon ic = new ImageIcon("src/main/ressources/" + tableauJeu[i][0].charAt(j) + ".png");
+					ImageIcon ic = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/" + tableauJeu[i][0].charAt(j) + ".png");
 					JLabel x = new JLabel(ic);
 					x.setBackground(Color.decode("0XCCCCCC"));
 					x.setOpaque(true);
@@ -113,7 +126,7 @@ public class PlateauMaster extends JPanel implements Plateau {
 				}
 				for (int j = tableauJeu[i][0].length(); j < longueurCode; j++) {
 
-					ImageIcon ic = new ImageIcon("src/main/ressources/vide.gif");
+					ImageIcon ic = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/vide.gif");
 					JLabel x = new JLabel(ic);
 					x.setBackground(Color.decode("0XCCCCCC"));
 					x.setOpaque(true);
@@ -126,19 +139,19 @@ public class PlateauMaster extends JPanel implements Plateau {
 			result.setLayout(new GridLayout(2, Math.round(longueurCode / 2)));
 			for (int j = 0; j < longueurCode; j++) {
 				if (tableauJeu[i][1] == null || tableauJeu[i][1].equals("") || j >= tableauJeu[i][1].length()) {
-					ImageIcon ic = new ImageIcon("src/main/ressources/vide15.gif");
+					ImageIcon ic = new ImageIcon("src/fr/flkoliv/p3_java2ee//ressources/vide15.gif");
 					JLabel x = new JLabel(ic);
 					result.add(x);
 				} else if (j < tableauJeu[i][1].length()) {
 
 					if (tableauJeu[i][1].charAt(j) == '=') {
-						ImageIcon ic = new ImageIcon("src/main/ressources/noir.png");
+						ImageIcon ic = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/noir.png");
 						JLabel x = new JLabel(ic);
 						x.setBackground(Color.decode("0XCCCCCC"));
 						x.setOpaque(true);
 						result.add(x);
 					} else if (tableauJeu[i][1].charAt(j) == '-') {
-						ImageIcon ic = new ImageIcon("src/main/ressources/blanc.png");
+						ImageIcon ic = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/blanc.png");
 						JLabel x = new JLabel(ic);
 						x.setBackground(Color.decode("0XCCCCCC"));
 						x.setOpaque(true);
@@ -147,7 +160,7 @@ public class PlateauMaster extends JPanel implements Plateau {
 				}
 			}
 			if (longueurCode % 2 != 0) {// si la longueur du code est impaire rajouter une case (purement esthétique)
-				ImageIcon ic = new ImageIcon("src/main/ressources/vide15.gif");
+				ImageIcon ic = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/vide15.gif");
 				JLabel x = new JLabel(ic);
 				result.add(x);
 			}
@@ -167,39 +180,36 @@ public class PlateauMaster extends JPanel implements Plateau {
 			actualiserAffichage();
 		}
 	}
-	
-	
+
 	@Override
 	public void cleanProposition() {
 		tableauJeu[emptyRow][0] = "";
 		actualiserAffichage();
 
 	}
-	
-	
+
 	@Override
 	public void validerSaisie() {
 		if (tableauJeu[emptyRow][0].length() == longueurCode) {
 			emptyRow++;
 			joueur.setTableauJeu(tableauJeu);
 			joueur.faireProposition();
-			
+
 		}
 	}
 
 	@Override
 	public void setValues(String[][] results) {
-		tableauJeu=results;
+		tableauJeu = results;
 		actualiserAffichage();
-		
-	}
 
+	}
 
 	@Override
 	public void setProposition(String string) {
-		tableauJeu[emptyRow][0]=string;
+		tableauJeu[emptyRow][0] = string;
 		actualiserAffichage();
-		
+
 	}
 
 }

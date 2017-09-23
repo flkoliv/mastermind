@@ -253,4 +253,6 @@ public abstract class Joueur extends Observable implements Observer {
 		this.tableauJeu = tab;
 	}
 
+	
+
 }

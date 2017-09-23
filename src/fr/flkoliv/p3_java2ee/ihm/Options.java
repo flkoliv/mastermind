@@ -85,7 +85,7 @@ public class Options {
 		Properties prop = new Properties();
 		OutputStream output = null;
 		try {
-			output = new FileOutputStream("src/main/ressources/config.properties");
+			output = new FileOutputStream("src/fr/flkoliv/p3_java2ee/ressources/config.properties");
 			prop.setProperty("nbrEssaisPlus", nbrEssaisPlus.toString());
 			prop.setProperty("tailleCodePlus", longueurCodePlus.toString());
 			prop.setProperty("nbrEssaisMaster", nbrEssaisMaster.toString());
@@ -112,7 +112,7 @@ public class Options {
 		Properties prop = new Properties();
 		InputStream input = null;
 		try {
-			input = new FileInputStream("src/main/ressources/config.properties");
+			input = new FileInputStream("src/fr/flkoliv/p3_java2ee/ressources/config.properties");
 			prop.load(input);
 			nbrEssaisPlus = Integer.parseInt(prop.getProperty("nbrEssaisPlus"));
 			nbrEssaisMaster = Integer.parseInt(prop.getProperty("nbrEssaisMaster"));
