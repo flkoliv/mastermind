@@ -2,6 +2,8 @@ package ihm;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -61,6 +63,7 @@ public class PlateauPlus extends JPanel implements Plateau {
 		//Object[][] tableau = new Object[this.taille][2];
 		tableauJeu = joueur.getTableauJeu();
 		tab = new JTable(tableauJeu, title);
+		tab.setFont(new Font("Serif", Font.BOLD, 20));
 		tab.setEnabled(false);
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.add(Box.createRigidArea(new Dimension(0, 15)));

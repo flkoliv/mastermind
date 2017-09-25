@@ -95,32 +95,32 @@ public abstract class Joueur extends Observable implements Observer {
 
 	public String construireReponseMaster(String code) {
 		String result = "";
-		boolean[][] tab = new boolean[2][code.length()];
+		boolean[] tab = new boolean[code.length()];
+		boolean[] tab2 = new boolean[code.length()];
 		for (int i = 0; i < code.length(); i++) {
-			tab[0][i] = true;
-			tab[1][i] = true;
-			
+			tab[i] = true;
+			tab2[i] = true;
 		}
 		for (int i = 0; i < code.length(); i++) {
 			if (code.charAt(i) == codeATrouver.charAt(i)) {
 				result = result + "=";
-				tab[0][i] = false;
-				tab[1][i] = false;
+				tab[i] = false;
 			}
 		}
 		for (int i = 0; i < code.length(); i++) {
-			if (tab[0][i]) {
+			if (tab[i]) {
 				for (int j = 0; j < code.length(); j++) {
-					if (tab[1][j]) {
-						if (code.charAt(i) == codeATrouver.charAt(j)) {
-							result = result + "-";
-							tab[1][j] = false;
 
-						}
+					if (code.charAt(i) == codeATrouver.charAt(j)&&tab2[j]) {
+						result = result + "-";
+						tab2[j] = false;
+						j=code.length();
+
 					}
+
 				}
 			}
-			
+
 		}
 		return result;
 	}
@@ -252,7 +252,5 @@ public abstract class Joueur extends Observable implements Observer {
 	public void setTableauJeu(String[][] tab) {
 		this.tableauJeu = tab;
 	}
-
-	
 
 }

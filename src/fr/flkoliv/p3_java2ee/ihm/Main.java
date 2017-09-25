@@ -1,6 +1,7 @@
 package ihm;
 
 import java.awt.Dimension;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,6 +18,7 @@ import joueurs.Joueur;
 import joueurs.Ordinateur;
 import listener.MenuListener;
 
+
 public class Main extends JFrame {
 
 	/**
@@ -27,6 +29,7 @@ public class Main extends JFrame {
 	private Joueur joueur1 = new Humain();
 	private Joueur joueur2 = new Ordinateur();
 	private static Main INSTANCE;
+	private static Options options = Options.getInstance();
 
 	private Main() {
 		logger.info("Lancement programme");
@@ -51,6 +54,12 @@ public class Main extends JFrame {
 
 	public static void main(String[] args) {
 		INSTANCE = new Main();
+		for (int i = 0 ; i<args.length;i++) {
+			if (args[i].equals("dev")) {
+				options.setDev(true);
+				options.sauvegardeConfig();
+			}
+		}
 	}
 
 	private void initialiseMenu() {

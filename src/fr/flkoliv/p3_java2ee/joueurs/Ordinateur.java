@@ -1,5 +1,9 @@
 package joueurs;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ihm.Options;
@@ -8,6 +12,7 @@ public class Ordinateur extends Joueur {
 
 	private static final Logger logger = LogManager.getLogger();
 	private int rechercheCode[][];
+	List<String> l = new LinkedList<String>();
 
 	public Ordinateur() {
 		super();
@@ -102,12 +107,60 @@ public class Ordinateur extends Joueur {
 	}
 
 	private void chercherCodeMaster() {
+
+		String prop  ="";
+		if (emptyRowTableauJeu == 0) l.clear();
+		if (l.isEmpty()) {
+			double d = Math.pow(Options.getInstance().getNbrCouleursMaster(),
+					Options.getInstance().getlongueurCodeMaster());
+			int nbrMax = (int) d;
+
+			for (int i = 0; i < nbrMax; i++) {
+				String s = Integer.toString(i, Options.getInstance().getNbrCouleursMaster());
+				while (s.length() < Options.getInstance().getlongueurCodeMaster()) {
+					s = "0" + s;
+				}
+				l.add(s);
+			}
+			String code = "";
+			int nbrChrCode = Options.getInstance().getlongueurCodeMaster();
+			int nbrCouleurs = Options.getInstance().getNbrCouleursMaster();
+			do {
+				Integer c = (int) (Math.random() * 10);
+				if (c < nbrCouleurs) {
+					code = code + c;
+				}
+			} while (code.length() < nbrChrCode);
+			prop = code;
+			System.out.println("size : "+l.size());
+		}else {
+			String resultat = tableauJeu[emptyRowTableauJeu - 1][1];
+			prop = tableauJeu[emptyRowTableauJeu - 1][0];
+			for(int i = 0; i < l.size(); i++) {
+				if (!construireReponseMaster(prop,l.get(i)).equals(resultat)) {
+					l.remove(i);
+					i--;
+				}
+			}
+			Random r = new Random();
+			int valeur=0;
+			if (l.size()>0) {
+				valeur =  r.nextInt(l.size());
+			}
+			System.out.println("size : "+l.size()+" / valeur : "+valeur);
+			prop = l.get(valeur);
+
+			
+			
+		}
+		final String str = prop;
 		Thread t = new Thread() { // thread pour l'affichage dans le JTextField et ne pas bloquer l'affichage
+			
 			public void run() {
 				try {
 					String s = "";
 					for (int i = 0; i < Options.getInstance().getlongueurCodeMaster(); i++) {
-						s = s + i;
+						s = s + str.charAt(i);
 						plateau.setProposition(s);
 						Thread.sleep(200);
 					}
@@ -122,4 +175,37 @@ public class Ordinateur extends Joueur {
 		t.start();
 	}
 
+	public String construireReponseMaster(String code, String codAtrouver) {
+		String result = "";
+		boolean[] tab = new boolean[code.length()];
+		boolean[] tab2 = new boolean[code.length()];
+		for (int i = 0; i < code.length(); i++) {
+			tab[i] = true;
+			tab2[i] = true;
+		}
+		for (int i = 0; i < code.length(); i++) {
+			if (code.charAt(i) == codAtrouver.charAt(i)) {
+				result = result + "=";
+				tab[i] = false;
+			}
+		}
+		for (int i = 0; i < code.length(); i++) {
+			if (tab[i]) {
+				for (int j = 0; j < code.length(); j++) {
+
+					if (code.charAt(i) == codAtrouver.charAt(j)&&tab2[j]) {
+						result = result + "-";
+						tab2[j] = false;
+						j=code.length();
+
+					}
+
+				}
+			}
+
+		}
+		return result;
+	}
+	
+	
 }
