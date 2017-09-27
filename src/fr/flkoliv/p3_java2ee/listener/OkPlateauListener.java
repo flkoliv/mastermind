@@ -8,6 +8,12 @@ import org.apache.logging.log4j.Logger;
 import ihm.Options;
 import ihm.Plateau;
 
+/**
+ * Listener du plateau plus ou moins
+ * 
+ * @author flkoliv
+ *
+ */
 public class OkPlateauListener implements ActionListener {
 	private static final Logger logger = LogManager.getLogger();
 
@@ -16,7 +22,7 @@ public class OkPlateauListener implements ActionListener {
 
 	public OkPlateauListener(JTextField jtf, Plateau p) {
 		this.jtf = jtf;
-		this.p=p;
+		this.p = p;
 	}
 
 	@Override
@@ -27,8 +33,8 @@ public class OkPlateauListener implements ActionListener {
 			jtf.setText("");
 			logger.debug("proposition pas assez longue : " + prop);
 		} else {
-			logger.debug("proposition ok");			
-			p.validerSaisie();	
+			logger.debug("proposition ok");
+			p.validerSaisie();
 		}
 
 	}

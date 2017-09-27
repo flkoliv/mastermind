@@ -5,18 +5,23 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JDialog;
 
-public class AideListener implements ActionListener{
+/**
+ * Listener de la DialogBox Aide (pour la fermer en appuyant sur OK)
+ * 
+ * @author flkoliv
+ *
+ */
+public class AideListener implements ActionListener {
 
-	JDialog j;
-	
+	private JDialog j;
+
 	public AideListener(JDialog j) {
-		this.j=j;
+		this.j = j;
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		j.dispose();
-		
+		j.dispose(); // ferme la dialogBox aide
 	}
 
 }

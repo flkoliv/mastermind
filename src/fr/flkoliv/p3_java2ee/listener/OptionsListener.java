@@ -7,6 +7,12 @@ import javax.swing.JOptionPane;
 import ihm.Options;
 import ihm.OptionsDialogBox;
 
+/**
+ * Listener de la boite de dialogue options
+ * 
+ * @author flkoliv
+ *
+ */
 public class OptionsListener implements ActionListener{
 
 	OptionsDialogBox optionsDialogBox;
