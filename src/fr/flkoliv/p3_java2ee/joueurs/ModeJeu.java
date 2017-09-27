@@ -1,6 +1,13 @@
 package joueurs;
 
+/**
+ * les différents modes de jeu disponibles
+ * 
+ * @author flkoliv
+ *
+ */
 public enum ModeJeu {
+	
 	CHALLENGER("Challenger"), DEFENSEUR("Defenseur"), DUEL("Duel");
 
 	private String mode = "";

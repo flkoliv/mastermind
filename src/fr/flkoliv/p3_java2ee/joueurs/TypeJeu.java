@@ -1,8 +1,15 @@
 package joueurs;
 
+/**
+ * Les différents types de jeux disponibles
+ * 
+ * @author flkoliv
+ *
+ */
 public enum TypeJeu {
-	MASTERMIND ("Mastermind"), PLUSOUMOINS("Plus ou Moins");
-	
+
+	MASTERMIND("Mastermind"), PLUSOUMOINS("Plus ou Moins");
+
 	private String type = "";
 
 	TypeJeu(String type) {
@@ -13,4 +20,5 @@ public enum TypeJeu {
 	public String toString() {
 		return type;
 	}
+
 }
