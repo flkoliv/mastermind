@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-
+import javax.swing.table.DefaultTableCellRenderer; 
 import joueurs.Joueur;
 import listener.EntreeListener;
 import listener.OkPlateauListener;
@@ -63,8 +63,11 @@ public class PlateauPlus extends JPanel implements Plateau {
 		//Object[][] tableau = new Object[this.taille][2];
 		tableauJeu = joueur.getTableauJeu();
 		tab = new JTable(tableauJeu, title);
-		tab.setFont(new Font("Serif", Font.BOLD, 20));
+		tab.setFont(new Font("Courier New", Font.BOLD, 17));
 		tab.setEnabled(false);
+		DefaultTableCellRenderer custom = new DefaultTableCellRenderer(); 
+		custom.setHorizontalAlignment(JLabel.CENTER); 
+		for (int i=0 ; i<tab.getColumnCount() ; i++) tab.getColumnModel().getColumn(i).setCellRenderer(custom); 
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.add(Box.createRigidArea(new Dimension(0, 15)));
 		this.add(saisie, BorderLayout.NORTH);

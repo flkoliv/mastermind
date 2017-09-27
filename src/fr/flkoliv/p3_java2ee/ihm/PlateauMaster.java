@@ -5,7 +5,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -13,11 +12,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import joueurs.Joueur;
 import layout.TableLayout;
-import listener.MasterButtonListener;
 import listener.ChoixCouleurListener;
+import listener.MasterButtonListener;
 
 public class PlateauMaster extends JPanel implements Plateau {
 
@@ -44,9 +42,8 @@ public class PlateauMaster extends JPanel implements Plateau {
 		dev = new JPanel();
 		dev.setVisible(false);
 		dev.setLayout(new BoxLayout(dev, BoxLayout.LINE_AXIS));
-		dev.setBorder(BorderFactory.createTitledBorder(
-				BorderFactory.createEtchedBorder(),
-				"Solution",0,0,new Font("Dialog", 1, 12),Color.BLACK));
+		dev.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Solution", 0, 0,
+				new Font("Dialog", 1, 12), Color.BLACK));
 		boutons = new JPanel();
 		boutons.setLayout(new BoxLayout(boutons, BoxLayout.LINE_AXIS));
 		okButton = new JButton("OK");
@@ -54,7 +51,7 @@ public class PlateauMaster extends JPanel implements Plateau {
 		effacerButton = new JButton("Effacer");
 		effacerButton.addActionListener(new MasterButtonListener(this));
 		boutons.add(okButton);
-		boutons.add(Box.createRigidArea(new Dimension(20, 0)));
+		boutons.add(Box.createRigidArea(new Dimension(10, 0)));
 		boutons.add(effacerButton);
 		boutonsCouleur = new JPanel();
 		boutonsCouleur.setLayout(new BoxLayout(boutonsCouleur, BoxLayout.LINE_AXIS));
@@ -67,28 +64,50 @@ public class PlateauMaster extends JPanel implements Plateau {
 		}
 		resultat = new JPanel();
 		actualiserAffichage();
+		JPanel res = new JPanel();
+		res.add(resultat);
+
+		dev.setAlignmentX(Component.CENTER_ALIGNMENT);
+		resultat.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		boutonsCouleur.setAlignmentX(Component.CENTER_ALIGNMENT);
+		boutons.setAlignmentX(Component.CENTER_ALIGNMENT);
+		if (!joueur.isHuman()) {
+			boutons.setVisible(false);
+			boutonsCouleur.setVisible(false);
+
+		}
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-		this.setAlignmentX(Component.CENTER_ALIGNMENT);
-		this.add(boutons);
-		this.add(Box.createRigidArea(new Dimension(0, 20)));
-		this.add(boutonsCouleur);
-		this.add(Box.createRigidArea(new Dimension(0, 20)));
-		this.add(resultat);
-		this.add(Box.createRigidArea(new Dimension(0, 20)));
 		this.add(dev);
+		this.add(Box.createRigidArea(new Dimension(0, 10)));
+		this.add(res);
+		this.add(Box.createRigidArea(new Dimension(0, 10)));
+		this.add(boutonsCouleur);
+		this.add(Box.createRigidArea(new Dimension(0, 10)));
+		this.add(boutons);
+		if (!joueur.isHuman()) {
+			boutons.setVisible(false);
+			boutonsCouleur.setVisible(false);
+			this.add(Box.createRigidArea(new Dimension(0, 55)));
+		}
+
 	}
 
 	/**
 	 * Affiche la combinaison secrète à des fin de débogage
-	 * @param msg la combinaison à afficher sous forme de chaîne de caractère de valeurs numériques (0-9)
+	 * 
+	 * @param msg
+	 *            la combinaison à afficher sous forme de chaîne de caractère de
+	 *            valeurs numériques (0-9)
 	 */
 	@Override
 	public void setMsgDev(String msg) {
-		for (int i=0;i<longueurCode;i++) {
-			ImageIcon ic = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/" + msg.charAt(i) + ".png");
-			JLabel x = new JLabel(ic);
-			dev.add(x);
-			dev.setVisible(true);
+		for (int i = 0; i < longueurCode; i++) {
+			if (!msg.equals("") && msg != null) {
+				ImageIcon ic = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/" + msg.charAt(i) + ".png");
+				JLabel x = new JLabel(ic);
+				dev.add(x);
+				dev.setVisible(true);
+			}
 		}
 
 	}
@@ -98,7 +117,8 @@ public class PlateauMaster extends JPanel implements Plateau {
 	 */
 	public void actualiserAffichage() {
 		resultat.removeAll();
-		double size[][] = new double[2][];//créer un tableau de tailles de case pour le TableLayout
+		resultat.setSize(longueurCode * 30 + Math.round(longueurCode * 15 / 2), taille * 30);
+		double size[][] = new double[2][];// créer un tableau de tailles de case pour le TableLayout
 		size[0] = new double[longueurCode + 1];
 		size[1] = new double[taille];
 		for (int i = 0; i < longueurCode; i++) {
@@ -107,6 +127,7 @@ public class PlateauMaster extends JPanel implements Plateau {
 		for (int i = 0; i < taille; i++) {
 			size[1][i] = 30;
 		}
+
 		size[0][longueurCode] = longueurCode * 15 / 2;
 
 		resultat.setLayout(new TableLayout(size));
@@ -126,7 +147,8 @@ public class PlateauMaster extends JPanel implements Plateau {
 			} else { // s'il y a une proposition dans le tableau
 				for (int j = 0; j < tableauJeu[i][0].length(); j++) {
 
-					ImageIcon ic = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/" + tableauJeu[i][0].charAt(j) + ".png");
+					ImageIcon ic = new ImageIcon(
+							"src/fr/flkoliv/p3_java2ee/ressources/" + tableauJeu[i][0].charAt(j) + ".png");
 					JLabel x = new JLabel(ic);
 					x.setBackground(Color.decode("0XCCCCCC"));
 					x.setOpaque(true);
@@ -181,10 +203,11 @@ public class PlateauMaster extends JPanel implements Plateau {
 		resultat.validate();
 	}
 
-	
 	/**
 	 * ajoute une couleur au tableau lors d'un clic
-	 * @param name la couleur sous forme de String (valeur numérique de 0-9)
+	 * 
+	 * @param name
+	 *            la couleur sous forme de String (valeur numérique de 0-9)
 	 */
 	public void ajouter(String name) {
 		if (tableauJeu[emptyRow][0] == null) {
@@ -208,7 +231,7 @@ public class PlateauMaster extends JPanel implements Plateau {
 
 	@Override
 	/**
-	 * valide la proposition (par l'appui sur le bouton ok du JPanel
+	 * valide la proposition (par l'appui sur le bouton "OK" du JPanel
 	 */
 	public void validerSaisie() {
 		if (tableauJeu[emptyRow][0].length() == longueurCode) {
@@ -222,7 +245,9 @@ public class PlateauMaster extends JPanel implements Plateau {
 	@Override
 	/**
 	 * récupère les résultat et actualise l'affichage
-	 * @param results tableau de proposition et de résultats
+	 * 
+	 * @param results
+	 *            tableau de proposition et de résultats
 	 */
 	public void setValues(String[][] results) {
 		tableauJeu = results;
@@ -233,7 +258,9 @@ public class PlateauMaster extends JPanel implements Plateau {
 	@Override
 	/**
 	 * mettre la proposition dans le tableau de jeu et actualiser l'affichage
-	 * @param string chaîne de caractère représentant la proposition
+	 * 
+	 * @param string
+	 *            chaîne de caractère représentant la proposition
 	 */
 	public void setProposition(String string) {
 		tableauJeu[emptyRow][0] = string;

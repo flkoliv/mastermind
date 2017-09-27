@@ -106,6 +106,11 @@ public class Ordinateur extends Joueur {
 		t.start();
 	}
 
+	
+	
+	
+	
+	
 	private void chercherCodeMaster() {
 
 		String prop  ="";
@@ -140,7 +145,9 @@ public class Ordinateur extends Joueur {
 				if (!construireReponseMaster(prop,l.get(i)).equals(resultat)) {
 					l.remove(i);
 					i--;
+					
 				}
+				//System.out.println(i);
 			}
 			Random r = new Random();
 			int valeur=0;
@@ -187,6 +194,7 @@ public class Ordinateur extends Joueur {
 			if (code.charAt(i) == codAtrouver.charAt(i)) {
 				result = result + "=";
 				tab[i] = false;
+				tab2[i]=false;
 			}
 		}
 		for (int i = 0; i < code.length(); i++) {

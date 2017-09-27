@@ -1,6 +1,6 @@
 package ihm;
 
-import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 import joueurs.Humain;
 import listener.ChoixCouleurListener;
-import listener.OkNewCodeBoxListener;
+import listener.NewCodeBoxListener;
 
 public class NewCodeBox extends JDialog {
 
@@ -23,13 +23,14 @@ public class NewCodeBox extends JDialog {
 	JPanel boutonsCouleur;
 	JPanel choix;
 	JPanel panel;
+	JPanel proposition;
 	String code = "";
 	Humain humain;
 
 	public NewCodeBox(Humain humain, String title, boolean modal) {
 		super(Main.getInstance(), title, true);
-		this.humain=humain;
-		this.setSize(550, 270);
+		this.humain = humain;
+		this.setSize(450, 195);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
@@ -52,14 +53,27 @@ public class NewCodeBox extends JDialog {
 			boutonsCouleur.add(imageA);
 		}
 		choix = new JPanel();
-		choix.setBorder(BorderFactory.createLineBorder(Color.black));
-		JButton okButton = new JButton("OK");
-		okButton.addActionListener(new OkNewCodeBoxListener(this));
+		proposition = new JPanel();
+		choix.setBorder(BorderFactory.createTitledBorder("Proposition :"));
+		proposition.setBorder(BorderFactory.createTitledBorder("Sélectionnez votre combinaison :"));
+		proposition.setMaximumSize(new Dimension(450, 80));
 
+		JPanel boutons = new JPanel();
+		JButton okButton = new JButton("OK");
+		JButton effacerButton = new JButton("Effacer");
+		boutons.add(okButton);
+		boutons.add(effacerButton);
+		okButton.addActionListener(new NewCodeBoxListener(this));
+		okButton.setName("OK");
+		effacerButton.addActionListener(new NewCodeBoxListener(this));
+		effacerButton.setName("Effacer");
+		proposition.add(boutonsCouleur);
+		proposition.add(boutons);
+		proposition.setLayout(new BoxLayout(proposition, BoxLayout.PAGE_AXIS));
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-		panel.add(boutonsCouleur);
 		panel.add(choix);
-		panel.add(okButton);
+		panel.add(proposition);
+
 	}
 
 	public void addColor(String c) {
@@ -71,10 +85,16 @@ public class NewCodeBox extends JDialog {
 			imageA.setName("" + c);
 			choix.add(imageA);
 			this.getContentPane().validate();
-			
 		}
 	}
-	
+
+	public void effacer() {
+		choix.removeAll();
+		code = "";
+		choix.repaint();
+		this.getContentPane().validate();
+	}
+
 	public void envoyerCode() {
 		if (code.length() == Options.getInstance().getlongueurCodeMaster()) {
 			humain.setCodeAtrouver(code);

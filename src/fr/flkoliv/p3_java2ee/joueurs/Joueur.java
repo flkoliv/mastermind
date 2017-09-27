@@ -105,6 +105,7 @@ public abstract class Joueur extends Observable implements Observer {
 			if (code.charAt(i) == codeATrouver.charAt(i)) {
 				result = result + "=";
 				tab[i] = false;
+				tab2[i]=false;
 			}
 		}
 		for (int i = 0; i < code.length(); i++) {
