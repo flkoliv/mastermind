@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import ihm.Aide;
 import ihm.Main;
 import ihm.OptionsDialogBox;
 import joueurs.ModeJeu;
@@ -54,7 +55,8 @@ public class MenuListener implements ActionListener {
 			new OptionsDialogBox(null, "Options", true);
 			break;
 		case "aide":
-			JOptionPane.showMessageDialog(null, "Aide", "Attention", JOptionPane.WARNING_MESSAGE);
+			//JOptionPane.showMessageDialog(null, "Aide", "Attention", JOptionPane.WARNING_MESSAGE);
+			new Aide(Main.getInstance(),"Aide",true);
 			break;
 		case "quitter":
 			System.exit(0);

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" additionalparam="-encoding utf8 -docencoding utf8 -charset utf8 -charset &quot;UTF-8&quot;" author="true" classpath="lib/log4j-api-2.9.0.jar;lib/log4j-core-2.9.0.jar;lib/tablelayout.jar" destdir="doc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="ihm,listener,joueurs" source="1.8" sourcepath="lib;src/fr/flkoliv/p3_java2ee/ressources;src/fr/flkoliv/p3_java2ee" splitindex="true" use="true" version="true"/>
+    </target>
+</project>

@@ -7,7 +7,7 @@ import javax.swing.text.PlainDocument;
 public class JTextFieldLimiter extends PlainDocument {
 	/**
 	 * Classe pour empêcher des saisies autre q'un integer supérieure aux limites
-	 * spécifiées dans un JTextField
+	 * spécifiées dans un JTextField (limiter la valeur et la longueur en caractères)
 	 */
 	private static final long serialVersionUID = -8330008807748451055L;
 	private int limit;
@@ -26,7 +26,7 @@ public class JTextFieldLimiter extends PlainDocument {
 
 	@Override
 	public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
-		if (str == null)
+		if (str == null)//si str null ne rien insérer
 			return;
 		try {
 			String newChaine = this.getText(0, this.getLength()) + str;

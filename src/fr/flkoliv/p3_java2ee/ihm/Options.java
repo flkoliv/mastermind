@@ -9,20 +9,41 @@ import java.util.Properties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Options du jeu. Permets de les lire et écrire dans un fichier properties
+ * (singleton)
+ * 
+ * @author flkoliv
+ *
+ */
 public class Options {
-	
+
 	private Integer nbrEssaisPlus, nbrEssaisMaster, longueurCodePlus, longueurCodeMaster, nbrCouleursMaster;
 	private Boolean dev;
 	private static final Logger logger = LogManager.getLogger();
 	private static Options INSTANCE = new Options();
 
 	/**
-	 * 
+	 * Lit le fichier properties lors de la création de l'objet
 	 */
 	private Options() {
 		lectureConfig();
 	}
 
+	/**
+	 * @param nbrEssaisPlus
+	 *            Nombres d'essais pour le jeu Plus ou Moins
+	 * @param nbrEssaisMaster
+	 *            Nombres d'essais pour le jeu mastermind
+	 * @param longueurCodePlus
+	 *            longueur de la combinaison du jeu Plus ou Moins
+	 * @param longueurCodeMaster
+	 *            longueur de la combinaison du mastermind
+	 * @param nbrCouleursMaster
+	 *            Nombre de couleurs utilisés par le mastermind
+	 * @param dev
+	 *            mode développeur (pour afficher le résultat dès le début du jeu)
+	 */
 	public Options(Integer nbrEssaisPlus, Integer nbrEssaisMaster, Integer longueurCodePlus, Integer longueurCodeMaster,
 			Integer nbrCouleursMaster, Boolean dev) {
 		this.nbrEssaisPlus = nbrEssaisPlus;
@@ -33,54 +54,99 @@ public class Options {
 		this.dev = dev;
 	}
 
+	/**
+	 * @param b
+	 *            mode développeur (pour afficher le résultat dès le début du jeu)
+	 */
 	public void setDev(boolean b) {
 		this.dev = b;
 	}
 
+	/**
+	 * @param i
+	 *            Nombres d'essais pour le jeu Plus ou Moins
+	 */
 	public void setNbrEssaisPlus(int i) {
 		this.nbrEssaisPlus = i;
 	}
 
+	/**
+	 * @param i
+	 *            Nombres d'essais pour le jeu mastermind
+	 */
 	public void setNbrEssaisMaster(int i) {
 		this.nbrEssaisMaster = i;
 	}
 
+	/**
+	 * @param i
+	 *            longueur de la combinaison du jeu Plus ou Moins
+	 */
 	public void setlongueurCodePlus(int i) {
 		this.longueurCodePlus = i;
 	}
 
+	/**
+	 * @param i
+	 *            longueur de la combinaison du mastermind
+	 */
 	public void setlongueurCodeMaster(int i) {
 		this.longueurCodeMaster = i;
 	}
 
+	/**
+	 * @param i
+	 *            Nombre de couleurs utilisés par le mastermind
+	 */
 	public void setNbrCouleursMaster(int i) {
 		this.nbrCouleursMaster = i;
 	}
 
+	/**
+	 * @return mode développeur (pour afficher le résultat dès le début du jeu)
+	 */
 	public boolean getDev() {
 		return this.dev;
 	}
 
+	/**
+	 * @return Nombres d'essais pour le jeu Plus ou Moins
+	 */
 	public int getNbrEssaisPlus() {
 		return this.nbrEssaisPlus;
 	}
 
+	/**
+	 * @return Nombres d'essais pour le jeu mastermind
+	 */
 	public int getNbrEssaisMaster() {
 		return this.nbrEssaisMaster;
 	}
 
+	/**
+	 * @return longueur de la combinaison du jeu Plus ou Moins
+	 */
 	public int getlongueurCodePlus() {
 		return this.longueurCodePlus;
 	}
 
+	/**
+	 * @return longueur de la combinaison du jeu mastermind
+	 */
 	public int getlongueurCodeMaster() {
 		return this.longueurCodeMaster;
 	}
 
+	/**
+	 * @return Nombre de couleurs utilisés par le mastermind
+	 */
 	public int getNbrCouleursMaster() {
 		return this.nbrCouleursMaster;
 	}
 
+	/**
+	 * Sauvegarde les options dans le fichier config.properties
+	 */
 	public void sauvegardeConfig() {
 		Properties prop = new Properties();
 		OutputStream output = null;
@@ -108,6 +174,9 @@ public class Options {
 		}
 	}
 
+	/**
+	 * lit les options dans le fichier config.properties
+	 */
 	public void lectureConfig() {
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -143,20 +212,25 @@ public class Options {
 		}
 
 	}
-	
+
+	/**
+	 * @return l'instance de l'objet option (singleton)
+	 */
 	public static Options getInstance() {
 		return INSTANCE;
 	}
-	
+
+	/**
+	 * @param o
+	 *            objet Options
+	 */
 	public void setOptions(Options o) {
 		this.nbrEssaisPlus = o.getNbrEssaisPlus();
-		this.nbrEssaisMaster = o.getNbrEssaisMaster(); 
+		this.nbrEssaisMaster = o.getNbrEssaisMaster();
 		this.longueurCodePlus = o.getlongueurCodePlus();
-		this.longueurCodeMaster=o.getlongueurCodeMaster();
-		this.nbrCouleursMaster=o.getNbrCouleursMaster();
-		this.dev=o.getDev();
+		this.longueurCodeMaster = o.getlongueurCodeMaster();
+		this.nbrCouleursMaster = o.getNbrCouleursMaster();
+		this.dev = o.getDev();
 	}
-
-	
 
 }

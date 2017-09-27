@@ -18,12 +18,14 @@ import joueurs.Joueur;
 import joueurs.Ordinateur;
 import listener.MenuListener;
 
-
+/**
+ * Fenêtre principale du jeu
+ * 
+ * @author flkoliv
+ * @version 1
+ */
 public class Main extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7364375700141591165L;
 	private static final Logger logger = LogManager.getLogger();
 	private Joueur joueur1 = new Humain();
@@ -52,9 +54,16 @@ public class Main extends JFrame {
 
 	}
 
+	/**
+	 * Fonction de lancement de l'application. Prends "dev" en ligne de commande
+	 * pour lancer le mode dev.
+	 * 
+	 * @param args
+	 *            argument de la ligne de commande
+	 */
 	public static void main(String[] args) {
 		INSTANCE = new Main();
-		for (int i = 0 ; i<args.length;i++) {
+		for (int i = 0; i < args.length; i++) {
 			if (args[i].equals("dev")) {
 				options.setDev(true);
 				options.sauvegardeConfig();
@@ -62,6 +71,9 @@ public class Main extends JFrame {
 		}
 	}
 
+	/**
+	 * Initialise le menu de la fenêtre principale du jeu
+	 */
 	private void initialiseMenu() {
 		logger.trace("initialisation interface graphique principale");
 		JMenuBar menuBar = new JMenuBar();
@@ -115,24 +127,35 @@ public class Main extends JFrame {
 		this.setJMenuBar(menuBar);
 	}
 
+	/**
+	 * @return retourne le premier joueur
+	 */
 	public Joueur getJoueur1() {
 		return joueur1;
 	}
 
+	/**
+	 * @return retourne le second joueur
+	 */
 	public Joueur getJoueur2() {
 		return joueur2;
 	}
 
+	/**
+	 * @return l'instance de la fenêtre (singleton)
+	 */
 	public static Main getInstance() {
 		return INSTANCE;
 	}
 
+	/**
+	 * remet l'image de fond comme au lancement du jeu
+	 */
 	public static void setBackground() {
 		ImageIcon icone = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/mastermind.png");
 		JLabel image = new JLabel(icone);
 		INSTANCE.getContentPane().removeAll();
 		INSTANCE.getContentPane().add(image);
-
 		INSTANCE.repaint();
 		INSTANCE.validate();
 	}
