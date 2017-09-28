@@ -18,7 +18,8 @@ import org.apache.logging.log4j.Logger;
 import listener.AideListener;
 
 /**
- * Boite de dialogue d'aide. affiche le fichier aide.html
+ * Boite de dialogue d'aide. Affiche le fichier 'aide.html'
+ * 
  * @author flkoliv
  *
  */
@@ -42,10 +43,10 @@ public class Aide extends JDialog {
 	}
 
 	/**
-	 * initialise la partie graphique
+	 * Initialise la partie graphique
 	 */
 	public void initComponent() {
-		panel= new JPanel();
+		panel = new JPanel();
 		URL url;
 		try {
 			url = getClass().getResource("/aide.html");

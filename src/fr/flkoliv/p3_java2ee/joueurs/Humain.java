@@ -8,6 +8,13 @@ import org.apache.logging.log4j.Logger;
 import ihm.NewCodeBox;
 import ihm.Options;
 
+/**
+ * 
+ * Classe de joueur humain
+ * 
+ * @author flkoliv
+ *
+ */
 public class Humain extends Joueur {
 
 	private static final Logger logger = LogManager.getLogger();
@@ -16,6 +23,11 @@ public class Humain extends Joueur {
 		super();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see joueurs.Joueur#creerNouveauCode()
+	 */
 	@Override
 	public void creerNouveauCode() {
 		if (typeJeu == TypeJeu.PLUSOUMOINS) {
@@ -39,11 +51,16 @@ public class Humain extends Joueur {
 				}
 			} while (b);
 			codeATrouver = c;
-		}else if (typeJeu == TypeJeu.MASTERMIND) {
+		} else if (typeJeu == TypeJeu.MASTERMIND) {
 			new NewCodeBox(this, "Nouvelle Combinaison", true);
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see joueurs.Joueur#chercherCode()
+	 */
 	@Override
 	protected void chercherCode() {
 		// Rien à faire ici... à l'humain de chercher son code et de le taper dans
@@ -51,6 +68,10 @@ public class Humain extends Joueur {
 
 	}
 
+	/**
+	 * @param code
+	 *            combinaison à trouver par l'adversaire
+	 */
 	public void setCodeAtrouver(String code) {
 		codeATrouver = code;
 	}

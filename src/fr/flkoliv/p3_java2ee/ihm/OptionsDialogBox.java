@@ -15,15 +15,18 @@ import javax.swing.JTextField;
 
 import listener.OptionsListener;
 
-public class OptionsDialogBox extends JDialog{
-	/**
-	 * 
-	 */
+/**
+ * Boite de dialogue pour la modification des options
+ * 
+ * @author flkoliv
+ *
+ */
+public class OptionsDialogBox extends JDialog {
+
 	private static final long serialVersionUID = 6952041967112940744L;
 	private JTextField nombreEssaisPOM, tailleCodePOM, nombreEssaisMaster, tailleCodeMaster;
 	private JComboBox<Integer> nbrCouleursMaster;
 	private JCheckBox devMod;
-	
 
 	public OptionsDialogBox(Main parent, String title, boolean modal) {
 		super(parent, title, modal);
@@ -36,6 +39,9 @@ public class OptionsDialogBox extends JDialog{
 
 	}
 
+	/**
+	 * Initialisation graphique de la boite de dialogue
+	 */
 	private void initComponent() {
 
 		// panel POM
@@ -48,7 +54,8 @@ public class OptionsDialogBox extends JDialog{
 		nombreEssaisPOM.setText(String.valueOf(Options.getInstance().getNbrEssaisPlus()));
 		nombreEssaisPOM.setPreferredSize(new Dimension(25, 25));
 		tailleCodePOM = new JTextField();
-		tailleCodePOM.setDocument(new JTextFieldLimiter(9));//limité à 9 pour ne pas dépasser la valeur maximale des integer
+		tailleCodePOM.setDocument(new JTextFieldLimiter(9));// limité à 9 pour ne pas dépasser la valeur maximale des
+															// integer
 		tailleCodePOM.setText(String.valueOf(Options.getInstance().getlongueurCodePlus()));
 		tailleCodePOM.setPreferredSize(new Dimension(25, 25));
 		panPOM.add(new JLabel("Nombre d'essais"));
@@ -106,6 +113,9 @@ public class OptionsDialogBox extends JDialog{
 		this.getContentPane().add(panBoutons);
 	}
 
+	/**
+	 * @return un objet option en fonction des choix dans la boite dialogue
+	 */
 	public Options getOptions() {
 		int a = Integer.parseInt(nombreEssaisPOM.getText());
 		int b = Integer.parseInt(nombreEssaisMaster.getText());
@@ -113,7 +123,7 @@ public class OptionsDialogBox extends JDialog{
 		int d = Integer.parseInt(tailleCodeMaster.getText());
 		int e = (int) nbrCouleursMaster.getSelectedItem();
 		boolean f = devMod.isSelected();
-		 
+
 		if (a > 0 && b > 0 && c > 0 && d > 0) {
 			return new Options(a, b, c, d, e, f);
 		} else {

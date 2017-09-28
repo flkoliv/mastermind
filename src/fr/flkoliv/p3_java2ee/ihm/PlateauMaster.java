@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -12,11 +13,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import joueurs.Joueur;
 import layout.TableLayout;
 import listener.ChoixCouleurListener;
 import listener.MasterButtonListener;
 
+/**
+ * Plateau de jeu Mastermind
+ * 
+ * @author flkoliv
+ *
+ */
 public class PlateauMaster extends JPanel implements Plateau {
 
 	private static final long serialVersionUID = 1L;
@@ -30,9 +38,16 @@ public class PlateauMaster extends JPanel implements Plateau {
 	private JPanel boutonsCouleur;
 	private JPanel dev;
 	private String[][] tableauJeu;
-
 	private int emptyRow;
 
+	/**
+	 * @param taille
+	 *            nombre de propositions faisables
+	 * @param longueurCode
+	 *            longueur de la combinaison
+	 * @param j
+	 *            joueur propriétaire du plateau
+	 */
 	public PlateauMaster(int taille, int longueurCode, Joueur j) {
 		this.emptyRow = 0;
 		this.taille = taille;
@@ -98,6 +113,8 @@ public class PlateauMaster extends JPanel implements Plateau {
 	 * @param msg
 	 *            la combinaison à afficher sous forme de chaîne de caractère de
 	 *            valeurs numériques (0-9)
+	 * @see ihm.Plateau#setMsgDev(java.lang.String)
+	 * 
 	 */
 	@Override
 	public void setMsgDev(String msg) {
@@ -114,9 +131,11 @@ public class PlateauMaster extends JPanel implements Plateau {
 
 	/**
 	 * Actualise l'affichage à chaque changement de proposition ou de réponse
+	 * 
+	 * @see ihm.Plateau#actualiserAffichage()
 	 */
 	public void actualiserAffichage() {
-		resultat.removeAll();
+		resultat.removeAll(); // tout effacer pour mieux recommencer !
 		resultat.setSize(longueurCode * 30 + Math.round(longueurCode * 15 / 2), taille * 30);
 		double size[][] = new double[2][];// créer un tableau de tailles de case pour le TableLayout
 		size[0] = new double[longueurCode + 1];
@@ -219,20 +238,24 @@ public class PlateauMaster extends JPanel implements Plateau {
 		}
 	}
 
-	@Override
 	/**
 	 * Efface la proposition pour pouvoir en faire une nouvelle (avant validation)
+	 * 
+	 * @see ihm.Plateau#cleanProposition()
 	 */
+	@Override
 	public void cleanProposition() {
 		tableauJeu[emptyRow][0] = "";
 		actualiserAffichage();
 
 	}
 
-	@Override
 	/**
 	 * valide la proposition (par l'appui sur le bouton "OK" du JPanel
+	 * 
+	 * @see ihm.Plateau#validerSaisie()
 	 */
+	@Override
 	public void validerSaisie() {
 		if (tableauJeu[emptyRow][0].length() == longueurCode) {
 			emptyRow++;
@@ -242,26 +265,28 @@ public class PlateauMaster extends JPanel implements Plateau {
 		}
 	}
 
-	@Override
 	/**
-	 * récupère les résultat et actualise l'affichage
+	 * Récupère les résultat et actualise l'affichage
 	 * 
 	 * @param results
 	 *            tableau de proposition et de résultats
+	 * @see ihm.Plateau#setValues(java.lang.String[][])
 	 */
+	@Override
 	public void setValues(String[][] results) {
 		tableauJeu = results;
 		actualiserAffichage();
 
 	}
 
-	@Override
 	/**
-	 * mettre la proposition dans le tableau de jeu et actualiser l'affichage
+	 * Mettre la proposition dans le tableau de jeu et actualiser l'affichage
 	 * 
 	 * @param string
 	 *            chaîne de caractère représentant la proposition
+	 * @see ihm.Plateau#setProposition(java.lang.String)
 	 */
+	@Override
 	public void setProposition(String string) {
 		tableauJeu[emptyRow][0] = string;
 		actualiserAffichage();
