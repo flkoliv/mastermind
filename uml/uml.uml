@@ -42,6 +42,7 @@
             </defaultValue>
           </ownedAttribute>
           <ownedAttribute xmi:type="uml:Property" xmi:id="_DRKjMJ41EeeZyv6L3ya3KQ" name="INSTANCE" visibility="private" isStatic="true" type="_DPnEAJ41EeeZyv6L3ya3KQ" isUnique="false"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_6vPnIKRjEeeZo58ySBIQ-Q" name="menulistener" type="_Dp2wAJ41EeeZyv6L3ya3KQ" association="_6vMj0KRjEeeZo58ySBIQ-Q"/>
           <ownedOperation xmi:type="uml:Operation" xmi:id="_DRONkJ41EeeZyv6L3ya3KQ" name="Main" visibility="private"/>
           <ownedOperation xmi:type="uml:Operation" xmi:id="_DRmoEJ41EeeZyv6L3ya3KQ" name="main" visibility="public" isStatic="true">
             <ownedParameter xmi:type="uml:Parameter" xmi:id="_DRprYJ41EeeZyv6L3ya3KQ" name="args" type="_DJOIIJ41EeeZyv6L3ya3KQ">
@@ -617,6 +618,7 @@
           </ownedAttribute>
           <ownedAttribute xmi:type="uml:Property" xmi:id="_yVjJYKREEeeSRZGidvTaYg" name="modejeu" type="_DoPmcJ41EeeZyv6L3ya3KQ" association="_yVeQ4KREEeeSRZGidvTaYg"/>
           <ownedAttribute xmi:type="uml:Property" xmi:id="_-dkrIKREEeeSRZGidvTaYg" name="typejeu" type="_DeBTcZ41EeeZyv6L3ya3KQ" association="_-dhn0KREEeeSRZGidvTaYg"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_NV8cgaRkEeeZo58ySBIQ-Q" name="joueur" type="_DQ-9AJ41EeeZyv6L3ya3KQ" aggregation="shared" association="_NV71cKRkEeeZo58ySBIQ-Q"/>
           <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_De1LxJ41EeeZyv6L3ya3KQ" name="Joueur implements Observer" client="_DQ-9AJ41EeeZyv6L3ya3KQ" supplier="_De1Lwp41EeeZyv6L3ya3KQ" contract="_De1Lwp41EeeZyv6L3ya3KQ"/>
           <ownedOperation xmi:type="uml:Operation" xmi:id="_DffTFJ41EeeZyv6L3ya3KQ" name="Joueur" visibility="public"/>
           <ownedOperation xmi:type="uml:Operation" xmi:id="_DfodAJ41EeeZyv6L3ya3KQ" name="commencer" visibility="public">
@@ -754,7 +756,6 @@
             </specification>
           </ownedLiteral>
         </packagedElement>
-        <packagedElement xmi:type="uml:Dependency" xmi:id="_96hYwJ6vEeeGubZjDv3dvw" client="_DQ-9AJ41EeeZyv6L3ya3KQ" supplier="_DQ-9AJ41EeeZyv6L3ya3KQ"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Package" xmi:id="_DoihY541EeeZyv6L3ya3KQ" name="listener">
         <packagedElement xmi:type="uml:Class" xmi:id="_DosSYJ41EeeZyv6L3ya3KQ" name="OkPlateauListener" visibility="public">
@@ -830,6 +831,7 @@
             </defaultValue>
           </ownedAttribute>
           <ownedAttribute xmi:type="uml:Property" xmi:id="_Dp2wBJ41EeeZyv6L3ya3KQ" name="fenetre" visibility="private" type="_DPnEAJ41EeeZyv6L3ya3KQ" isUnique="false"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_UKIQoqRlEeeZo58ySBIQ-Q" name="optionsdialogbox" type="_Da_0oJ41EeeZyv6L3ya3KQ" association="_UKHCgKRlEeeZo58ySBIQ-Q"/>
           <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_Dp2wAZ41EeeZyv6L3ya3KQ" name="MenuListener implements ActionListener" client="_Dp2wAJ41EeeZyv6L3ya3KQ" supplier="_DosSY541EeeZyv6L3ya3KQ" contract="_DosSY541EeeZyv6L3ya3KQ"/>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_DqAhAp41EeeZyv6L3ya3KQ" name="MenuListener" specification="_Dp2wBZ41EeeZyv6L3ya3KQ">
             <language>JAVA</language>
@@ -887,18 +889,6 @@
           </ownedOperation>
           <ownedOperation xmi:type="uml:Operation" xmi:id="_DqmW4J41EeeZyv6L3ya3KQ" name="ChoixCouleurListener" visibility="public">
             <ownedParameter xmi:type="uml:Parameter" xmi:id="_DqmW4p41EeeZyv6L3ya3KQ" name="newCodeBox" type="_DVHPEJ41EeeZyv6L3ya3KQ"/>
-          </ownedOperation>
-          <ownedOperation xmi:type="uml:Operation" xmi:id="_DqzyQJ41EeeZyv6L3ya3KQ" name="mouseClicked" visibility="public">
-            <ownedParameter xmi:type="uml:Parameter" xmi:id="_DqzyQZ41EeeZyv6L3ya3KQ" name="arg0" type="_DqmW5J41EeeZyv6L3ya3KQ"/>
-          </ownedOperation>
-          <ownedOperation xmi:type="uml:Operation" xmi:id="_DqzyQ541EeeZyv6L3ya3KQ" name="mouseEntered" visibility="public">
-            <ownedParameter xmi:type="uml:Parameter" xmi:id="_Dq9jQJ41EeeZyv6L3ya3KQ" name="arg0" type="_DqmW5J41EeeZyv6L3ya3KQ"/>
-          </ownedOperation>
-          <ownedOperation xmi:type="uml:Operation" xmi:id="_Dq9jQp41EeeZyv6L3ya3KQ" name="mouseExited" visibility="public">
-            <ownedParameter xmi:type="uml:Parameter" xmi:id="_Dq9jQ541EeeZyv6L3ya3KQ" name="arg0" type="_DqmW5J41EeeZyv6L3ya3KQ"/>
-          </ownedOperation>
-          <ownedOperation xmi:type="uml:Operation" xmi:id="_DrHUQJ41EeeZyv6L3ya3KQ" name="mousePressed" visibility="public">
-            <ownedParameter xmi:type="uml:Parameter" xmi:id="_DrHUQZ41EeeZyv6L3ya3KQ" name="arg0" type="_DqmW5J41EeeZyv6L3ya3KQ"/>
           </ownedOperation>
           <ownedOperation xmi:type="uml:Operation" xmi:id="_DrHUQ541EeeZyv6L3ya3KQ" name="mouseReleased" visibility="public">
             <ownedParameter xmi:type="uml:Parameter" xmi:id="_DrHURJ41EeeZyv6L3ya3KQ" name="arg0" type="_DqmW5J41EeeZyv6L3ya3KQ"/>
@@ -1110,6 +1100,31 @@
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_DNh9sKRGEeeSRZGidvTaYg" value="1"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_DOJowKRGEeeSRZGidvTaYg" value="1"/>
       </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_s-X4QKRjEeeZo58ySBIQ-Q" memberEnd="_s-cJsKRjEeeZo58ySBIQ-Q _s-dX0KRjEeeZo58ySBIQ-Q">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_s-ZGYKRjEeeZo58ySBIQ-Q" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_s-ZtcKRjEeeZo58ySBIQ-Q" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_s-cJsKRjEeeZo58ySBIQ-Q" name="optionslistener" type="_Dru_UJ41EeeZyv6L3ya3KQ" association="_s-X4QKRjEeeZo58ySBIQ-Q"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_s-dX0KRjEeeZo58ySBIQ-Q" name="optionsdialogbox" type="_Da_0oJ41EeeZyv6L3ya3KQ" association="_s-X4QKRjEeeZo58ySBIQ-Q"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_6vMj0KRjEeeZo58ySBIQ-Q" memberEnd="_6vNx8aRjEeeZo58ySBIQ-Q _6vPnIKRjEeeZo58ySBIQ-Q">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_6vNK4KRjEeeZo58ySBIQ-Q" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_6vNx8KRjEeeZo58ySBIQ-Q" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_6vNx8aRjEeeZo58ySBIQ-Q" name="main" type="_DPnEAJ41EeeZyv6L3ya3KQ" association="_6vMj0KRjEeeZo58ySBIQ-Q"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_NV71cKRkEeeZo58ySBIQ-Q" memberEnd="_NV8cgaRkEeeZo58ySBIQ-Q _NV9qoKRkEeeZo58ySBIQ-Q">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_NV71caRkEeeZo58ySBIQ-Q" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_NV8cgKRkEeeZo58ySBIQ-Q" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_NV9qoKRkEeeZo58ySBIQ-Q" name="joueur" type="_DQ-9AJ41EeeZyv6L3ya3KQ" association="_NV71cKRkEeeZo58ySBIQ-Q"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_UKHCgKRlEeeZo58ySBIQ-Q" memberEnd="_UKIQoqRlEeeZo58ySBIQ-Q _UKI3sKRlEeeZo58ySBIQ-Q">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_UKIQoKRlEeeZo58ySBIQ-Q" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_UKIQoaRlEeeZo58ySBIQ-Q" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_UKI3sKRlEeeZo58ySBIQ-Q" name="menulistener" type="_Dp2wAJ41EeeZyv6L3ya3KQ" association="_UKHCgKRlEeeZo58ySBIQ-Q"/>
     </packagedElement>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_DGpVQJ41EeeZyv6L3ya3KQ">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_DGpVQZ41EeeZyv6L3ya3KQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
