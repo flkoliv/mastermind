@@ -8,5 +8,9 @@ Vous aurez à développer plusieurs variantes autour de la recherche de combinai
   *   La recherche d'une combinaison à l'aide d'indications +/- 
   *   Le célèbre Mastermind.
   
- Le programme est developpé avec le JDK 1.8. Pour le compiler, importez le dans eclipse
+ Le programme est developpé sous eclipse avec le jre1.8.0_144. 
+ 
+ Pour le compiler, importez le dans eclipse via le menu « File/Import » puis en sélectionnant « Général/Existing project into workspace »
+ 
+ Reconfigurez le chemin d’accès à votre JRE.
   
