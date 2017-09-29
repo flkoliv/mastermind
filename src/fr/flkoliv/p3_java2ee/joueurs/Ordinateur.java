@@ -105,6 +105,7 @@ public class Ordinateur extends Joueur {
 			}
 		}
 		Thread t = new Thread() { // thread pour l'affichage progressif dans le JTextField et ne pas bloquer l'IHM
+			@Override
 			public void run() {
 				try {
 					String s = "";
@@ -179,6 +180,7 @@ public class Ordinateur extends Joueur {
 		Thread t = new Thread() {
 			// thread pour ne pas bloquer l'IHM pendant l'affichage progressif de la
 			// proposition
+			@Override
 			public void run() {
 				try {
 					String s = "";

@@ -171,6 +171,7 @@ public abstract class Joueur extends Observable implements Observer {
 	 * 
 	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
 	 */
+	@Override
 	public void update(Observable arg0, Object arg1) {
 		String prop = (String) arg1;
 		if (codeATrouver.equals(prop)) {

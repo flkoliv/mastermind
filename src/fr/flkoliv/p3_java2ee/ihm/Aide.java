@@ -12,6 +12,7 @@ import javax.swing.JDialog;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.WindowConstants;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,7 +20,7 @@ import org.apache.logging.log4j.Logger;
 import listener.AideListener;
 
 /**
- * Boite de dialogue d'aide. Affiche le fichier 'aide.html'
+ * Boite de dialogue d'aide. Affiche le fichier "aide.html"
  * 
  * @author flkoliv
  *
@@ -37,7 +38,7 @@ public class Aide extends JDialog {
 		this.setSize(500, 400);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
-		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.initComponent();
 		this.setVisible(true);
 

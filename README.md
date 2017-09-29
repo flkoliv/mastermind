@@ -7,3 +7,6 @@ Vous aurez à développer plusieurs variantes autour de la recherche de combinai
 
   *   La recherche d'une combinaison à l'aide d'indications +/- 
   *   Le célèbre Mastermind.
+  
+ Le programme est developpé avec le JDK 1.8. Pour le compiler, importez le dans eclipse
+  

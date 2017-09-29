@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 import joueurs.Humain;
 import listener.ChoixCouleurListener;
@@ -36,7 +37,7 @@ public class NewCodeBox extends JDialog {
 		this.setSize(450, 195);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
-		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
 		panel = new JPanel();
 		this.initComponent();

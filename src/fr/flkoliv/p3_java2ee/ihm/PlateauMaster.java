@@ -134,6 +134,7 @@ public class PlateauMaster extends JPanel implements Plateau {
 	 * 
 	 * @see ihm.Plateau#actualiserAffichage()
 	 */
+	@Override
 	public void actualiserAffichage() {
 		resultat.removeAll(); // tout effacer pour mieux recommencer !
 		resultat.setSize(longueurCode * 30 + Math.round(longueurCode * 15 / 2), taille * 30);
