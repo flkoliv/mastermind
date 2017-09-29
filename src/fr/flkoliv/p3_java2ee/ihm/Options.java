@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -151,7 +152,7 @@ public class Options {
 		Properties prop = new Properties();
 		OutputStream output = null;
 		try {
-			output = new FileOutputStream("src/fr/flkoliv/p3_java2ee/ressources/config.properties");
+			output = new FileOutputStream("config.properties");
 			prop.setProperty("nbrEssaisPlus", nbrEssaisPlus.toString());
 			prop.setProperty("tailleCodePlus", longueurCodePlus.toString());
 			prop.setProperty("nbrEssaisMaster", nbrEssaisMaster.toString());
@@ -181,7 +182,7 @@ public class Options {
 		Properties prop = new Properties();
 		InputStream input = null;
 		try {
-			input = new FileInputStream("src/fr/flkoliv/p3_java2ee/ressources/config.properties");
+			input = new FileInputStream("config.properties");
 			prop.load(input);
 			nbrEssaisPlus = Integer.parseInt(prop.getProperty("nbrEssaisPlus"));
 			nbrEssaisMaster = Integer.parseInt(prop.getProperty("nbrEssaisMaster"));

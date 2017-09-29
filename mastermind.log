@@ -1,0 +1,9 @@
+15:56:23.887 [main] DEBUG ihm.Options - lecture du fichier config.properties...
+15:56:23.949 [main] INFO  ihm.Main - Lancement programme
+15:56:24.035 [main] TRACE ihm.Main - initialisation interface graphique principale
+15:58:24.763 [AWT-EventQueue-0] INFO  listener.MenuListener - Lancement de la boite de dialogue options
+15:58:44.377 [AWT-EventQueue-0] INFO  listener.MenuListener - Lancement jeu Plus ou moins en mode Challenger
+15:58:44.404 [AWT-EventQueue-0] DEBUG joueurs.Ordinateur - Nouveau code Plus ou Moins généré par l'ordinateur : 707
+16:20:48.170 [mastermind] DEBUG ihm.Options - lecture du fichier config.properties...
+16:20:48.232 [mastermind] INFO  ihm.Main - Lancement programme
+16:20:48.314 [mastermind] TRACE ihm.Main - initialisation interface graphique principale

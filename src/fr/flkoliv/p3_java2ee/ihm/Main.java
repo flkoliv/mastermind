@@ -32,6 +32,7 @@ public class Main extends JFrame {
 	private Joueur joueur2 = new Ordinateur();
 	private static Main INSTANCE;
 	private static Options options = Options.getInstance();
+	private static ImageIcon background;
 
 	private Main() {
 		logger.info("Lancement programme");
@@ -40,9 +41,10 @@ public class Main extends JFrame {
 		this.setSize(600, 600);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ImageIcon img = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/mastermind-icon.jpg");
+		ImageIcon img = new ImageIcon(getClass().getResource("/img/mastermind-icon.jpg"));
 		this.setIconImage(img.getImage());
-		ImageIcon icone = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/mastermind.png");
+		ImageIcon icone = new ImageIcon(getClass().getResource("/img/Mastermind.png"));
+		background =icone;
 		JLabel image = new JLabel(icone);
 		this.add(image);
 		this.setMinimumSize(new Dimension(620, 700));
@@ -152,8 +154,7 @@ public class Main extends JFrame {
 	 * remet l'image de fond comme au lancement du jeu
 	 */
 	public static void setBackground() {
-		ImageIcon icone = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/mastermind.png");
-		JLabel image = new JLabel(icone);
+		JLabel image = new JLabel(background);
 		INSTANCE.getContentPane().removeAll();
 		INSTANCE.getContentPane().add(image);
 		INSTANCE.repaint();

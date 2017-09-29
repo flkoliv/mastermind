@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -12,11 +13,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import joueurs.Joueur;
 import layout.TableLayout;
 import listener.ChoixCouleurListener;
 import listener.MasterButtonListener;
 
+/**
+ * Plateau de jeu Mastermind
+ * 
+ * @author flkoliv
+ *
+ */
 public class PlateauMaster extends JPanel implements Plateau {
 
 	private static final long serialVersionUID = 1L;
@@ -30,9 +38,16 @@ public class PlateauMaster extends JPanel implements Plateau {
 	private JPanel boutonsCouleur;
 	private JPanel dev;
 	private String[][] tableauJeu;
-
 	private int emptyRow;
 
+	/**
+	 * @param taille
+	 *            nombre de propositions faisables
+	 * @param longueurCode
+	 *            longueur de la combinaison
+	 * @param j
+	 *            joueur propriétaire du plateau
+	 */
 	public PlateauMaster(int taille, int longueurCode, Joueur j) {
 		this.emptyRow = 0;
 		this.taille = taille;
@@ -56,7 +71,7 @@ public class PlateauMaster extends JPanel implements Plateau {
 		boutonsCouleur = new JPanel();
 		boutonsCouleur.setLayout(new BoxLayout(boutonsCouleur, BoxLayout.LINE_AXIS));
 		for (int i = 0; i < Options.getInstance().getNbrCouleursMaster(); i++) {
-			ImageIcon iconeA = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/" + i + ".png");
+			ImageIcon iconeA = new ImageIcon(getClass().getResource("/img/" + i + ".png"));
 			JLabel imageA = new JLabel(iconeA);
 			imageA.addMouseListener(new ChoixCouleurListener(this));
 			imageA.setName("" + i);
@@ -98,12 +113,14 @@ public class PlateauMaster extends JPanel implements Plateau {
 	 * @param msg
 	 *            la combinaison à afficher sous forme de chaîne de caractère de
 	 *            valeurs numériques (0-9)
+	 * @see ihm.Plateau#setMsgDev(java.lang.String)
+	 * 
 	 */
 	@Override
 	public void setMsgDev(String msg) {
 		for (int i = 0; i < longueurCode; i++) {
 			if (!msg.equals("") && msg != null) {
-				ImageIcon ic = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/" + msg.charAt(i) + ".png");
+				ImageIcon ic = new ImageIcon(getClass().getResource("/img/" + msg.charAt(i) + ".png"));
 				JLabel x = new JLabel(ic);
 				dev.add(x);
 				dev.setVisible(true);
@@ -114,9 +131,11 @@ public class PlateauMaster extends JPanel implements Plateau {
 
 	/**
 	 * Actualise l'affichage à chaque changement de proposition ou de réponse
+	 * 
+	 * @see ihm.Plateau#actualiserAffichage()
 	 */
 	public void actualiserAffichage() {
-		resultat.removeAll();
+		resultat.removeAll(); // tout effacer pour mieux recommencer !
 		resultat.setSize(longueurCode * 30 + Math.round(longueurCode * 15 / 2), taille * 30);
 		double size[][] = new double[2][];// créer un tableau de tailles de case pour le TableLayout
 		size[0] = new double[longueurCode + 1];
@@ -135,7 +154,7 @@ public class PlateauMaster extends JPanel implements Plateau {
 			if (tableauJeu[i][0] == null || tableauJeu[i][0].equals("")) {// s'il n'y a pas de proposition dans le
 																			// tableau
 				for (int j = 0; j < longueurCode; j++) {
-					ImageIcon ic = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/vide.gif");
+					ImageIcon ic = new ImageIcon(getClass().getResource("/img/vide.gif"));
 					JLabel x = new JLabel(ic);
 
 					x.setBackground(Color.decode("0XCCCCCC"));
@@ -147,8 +166,7 @@ public class PlateauMaster extends JPanel implements Plateau {
 			} else { // s'il y a une proposition dans le tableau
 				for (int j = 0; j < tableauJeu[i][0].length(); j++) {
 
-					ImageIcon ic = new ImageIcon(
-							"src/fr/flkoliv/p3_java2ee/ressources/" + tableauJeu[i][0].charAt(j) + ".png");
+					ImageIcon ic = new ImageIcon(getClass().getResource("/img/" + tableauJeu[i][0].charAt(j) + ".png"));
 					JLabel x = new JLabel(ic);
 					x.setBackground(Color.decode("0XCCCCCC"));
 					x.setOpaque(true);
@@ -158,7 +176,7 @@ public class PlateauMaster extends JPanel implements Plateau {
 				}
 				for (int j = tableauJeu[i][0].length(); j < longueurCode; j++) {
 
-					ImageIcon ic = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/vide.gif");
+					ImageIcon ic = new ImageIcon(getClass().getResource("/img/vide.gif"));
 					JLabel x = new JLabel(ic);
 					x.setBackground(Color.decode("0XCCCCCC"));
 					x.setOpaque(true);
@@ -171,19 +189,19 @@ public class PlateauMaster extends JPanel implements Plateau {
 			result.setLayout(new GridLayout(2, Math.round(longueurCode / 2)));
 			for (int j = 0; j < longueurCode; j++) {
 				if (tableauJeu[i][1] == null || tableauJeu[i][1].equals("") || j >= tableauJeu[i][1].length()) {
-					ImageIcon ic = new ImageIcon("src/fr/flkoliv/p3_java2ee//ressources/vide15.gif");
+					ImageIcon ic = new ImageIcon(getClass().getResource("/img/vide15.gif"));
 					JLabel x = new JLabel(ic);
 					result.add(x);
 				} else if (j < tableauJeu[i][1].length()) {
 
 					if (tableauJeu[i][1].charAt(j) == '=') {
-						ImageIcon ic = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/noir.png");
+						ImageIcon ic = new ImageIcon(getClass().getResource("/img/noir.png"));
 						JLabel x = new JLabel(ic);
 						x.setBackground(Color.decode("0XCCCCCC"));
 						x.setOpaque(true);
 						result.add(x);
 					} else if (tableauJeu[i][1].charAt(j) == '-') {
-						ImageIcon ic = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/blanc.png");
+						ImageIcon ic = new ImageIcon(getClass().getResource("/img/blanc.png"));
 						JLabel x = new JLabel(ic);
 						x.setBackground(Color.decode("0XCCCCCC"));
 						x.setOpaque(true);
@@ -192,7 +210,7 @@ public class PlateauMaster extends JPanel implements Plateau {
 				}
 			}
 			if (longueurCode % 2 != 0) {// si la longueur du code est impaire rajouter une case (purement esthétique)
-				ImageIcon ic = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/vide15.gif");
+				ImageIcon ic = new ImageIcon(getClass().getResource("/img/vide15.gif"));
 				JLabel x = new JLabel(ic);
 				result.add(x);
 			}
@@ -219,20 +237,24 @@ public class PlateauMaster extends JPanel implements Plateau {
 		}
 	}
 
-	@Override
 	/**
 	 * Efface la proposition pour pouvoir en faire une nouvelle (avant validation)
+	 * 
+	 * @see ihm.Plateau#cleanProposition()
 	 */
+	@Override
 	public void cleanProposition() {
 		tableauJeu[emptyRow][0] = "";
 		actualiserAffichage();
 
 	}
 
-	@Override
 	/**
 	 * valide la proposition (par l'appui sur le bouton "OK" du JPanel
+	 * 
+	 * @see ihm.Plateau#validerSaisie()
 	 */
+	@Override
 	public void validerSaisie() {
 		if (tableauJeu[emptyRow][0].length() == longueurCode) {
 			emptyRow++;
@@ -242,26 +264,28 @@ public class PlateauMaster extends JPanel implements Plateau {
 		}
 	}
 
-	@Override
 	/**
-	 * récupère les résultat et actualise l'affichage
+	 * Récupère les résultat et actualise l'affichage
 	 * 
 	 * @param results
 	 *            tableau de proposition et de résultats
+	 * @see ihm.Plateau#setValues(java.lang.String[][])
 	 */
+	@Override
 	public void setValues(String[][] results) {
 		tableauJeu = results;
 		actualiserAffichage();
 
 	}
 
-	@Override
 	/**
-	 * mettre la proposition dans le tableau de jeu et actualiser l'affichage
+	 * Mettre la proposition dans le tableau de jeu et actualiser l'affichage
 	 * 
 	 * @param string
 	 *            chaîne de caractère représentant la proposition
+	 * @see ihm.Plateau#setProposition(java.lang.String)
 	 */
+	@Override
 	public void setProposition(String string) {
 		tableauJeu[emptyRow][0] = string;
 		actualiserAffichage();

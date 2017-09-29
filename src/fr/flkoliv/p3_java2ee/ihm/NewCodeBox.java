@@ -14,11 +14,14 @@ import joueurs.Humain;
 import listener.ChoixCouleurListener;
 import listener.NewCodeBoxListener;
 
+/**
+ * Boite de dialogue pour obtenir une combinaison mastermind
+ * 
+ * @author flkoliv
+ *
+ */
 public class NewCodeBox extends JDialog {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4434370607469563328L;
 	JPanel boutonsCouleur;
 	JPanel choix;
@@ -42,11 +45,14 @@ public class NewCodeBox extends JDialog {
 
 	}
 
+	/**
+	 * Initialisation de la partie graphique
+	 */
 	public void initComponent() {
 
 		boutonsCouleur = new JPanel();
 		for (int i = 0; i < Options.getInstance().getNbrCouleursMaster(); i++) {
-			ImageIcon iconeA = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/" + i + ".png");
+			ImageIcon iconeA = new ImageIcon(getClass().getResource("/img/" + i + ".png"));
 			JLabel imageA = new JLabel(iconeA);
 			imageA.addMouseListener(new ChoixCouleurListener(this));
 			imageA.setName("" + i);
@@ -76,10 +82,16 @@ public class NewCodeBox extends JDialog {
 
 	}
 
+	/**
+	 * Ajouter une couleur dans la combinaison proposée
+	 * 
+	 * @param c
+	 *            couleur à ajouter
+	 */
 	public void addColor(String c) {
 		if (code.length() < Options.getInstance().getlongueurCodeMaster()) {
 			code = code + c;
-			ImageIcon iconeA = new ImageIcon("src/fr/flkoliv/p3_java2ee/ressources/" + c + ".png");
+			ImageIcon iconeA = new ImageIcon(getClass().getResource("/img/" + c + ".png"));
 			JLabel imageA = new JLabel(iconeA);
 			imageA.addMouseListener(new ChoixCouleurListener(this));
 			imageA.setName("" + c);
@@ -88,6 +100,9 @@ public class NewCodeBox extends JDialog {
 		}
 	}
 
+	/**
+	 * Effacer la proposition pour en refaire une
+	 */
 	public void effacer() {
 		choix.removeAll();
 		code = "";
@@ -95,6 +110,9 @@ public class NewCodeBox extends JDialog {
 		this.getContentPane().validate();
 	}
 
+	/**
+	 * Valider le code et l'attribuer au joueur comme combinaison à trouver
+	 */
 	public void envoyerCode() {
 		if (code.length() == Options.getInstance().getlongueurCodeMaster()) {
 			humain.setCodeAtrouver(code);

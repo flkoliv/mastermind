@@ -3,14 +3,15 @@
  */
 package ihm;
 
+import java.awt.BorderLayout;
 import java.io.IOException;
 import java.net.URL;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,7 +19,8 @@ import org.apache.logging.log4j.Logger;
 import listener.AideListener;
 
 /**
- * Boite de dialogue d'aide. affiche le fichier aide.html
+ * Boite de dialogue d'aide. Affiche le fichier 'aide.html'
+ * 
  * @author flkoliv
  *
  */
@@ -42,23 +44,27 @@ public class Aide extends JDialog {
 	}
 
 	/**
-	 * initialise la partie graphique
+	 * Initialise la partie graphique
 	 */
 	public void initComponent() {
-		panel= new JPanel();
+		panel = new JPanel();
+		
 		URL url;
 		try {
-			url = getClass().getResource("/aide.html");
+			url = getClass().getResource("/aide/aide.html");
 			tp = new JEditorPane(url);
+			
 			logger.debug("chargement du fichier d'aide");
 		} catch (IOException e1) {
 			logger.debug("impossible de charger le fichier d'aide");
 		}
+		
+		panel.setLayout(new BorderLayout());
 		ok.addActionListener(new AideListener(this));
-		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 		tp.setEditable(false);
-		panel.add(tp);
-		panel.add(ok);
+		panel.add(new JScrollPane(tp),BorderLayout.CENTER);
+		panel.add(ok, BorderLayout.SOUTH );
+		
 		this.setContentPane(panel);
 	}
 
