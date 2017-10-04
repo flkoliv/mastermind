@@ -74,7 +74,7 @@ public class OptionsDialogBox extends JDialog {
 		nombreEssaisMaster.setText(String.valueOf(Options.getInstance().getNbrEssaisMaster()));
 		nombreEssaisMaster.setPreferredSize(new Dimension(25, 25));
 		tailleCodeMaster = new JTextField();
-		tailleCodeMaster.setDocument(new JTextFieldLimiter(9));
+		tailleCodeMaster.setDocument(new JTextFieldLimiter(5));
 		tailleCodeMaster.setText(String.valueOf(Options.getInstance().getlongueurCodeMaster()));
 		tailleCodeMaster.setPreferredSize(new Dimension(25, 25));
 		Integer[] tab = { 4, 5, 6, 7, 8, 9, 10 };

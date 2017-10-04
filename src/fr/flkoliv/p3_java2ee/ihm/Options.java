@@ -151,6 +151,21 @@ public class Options {
 	public void sauvegardeConfig() {
 		Properties prop = new Properties();
 		OutputStream output = null;
+		if (nbrEssaisPlus < 2||nbrEssaisPlus > 20) {
+			nbrEssaisPlus = 10;
+		}
+		if (nbrEssaisMaster < 2||nbrEssaisMaster > 20) {
+			nbrEssaisMaster = 10;
+		}
+		if (longueurCodePlus < 2||longueurCodePlus > 9) {
+			longueurCodePlus = 4;
+		}
+		if (longueurCodeMaster < 2||longueurCodeMaster > 5) {
+			longueurCodeMaster = 4;
+		}
+		if (nbrCouleursMaster < 4||nbrCouleursMaster > 10) {
+			nbrCouleursMaster = 6;
+		}
 		try {
 			output = new FileOutputStream("config.properties");
 			prop.setProperty("nbrEssaisPlus", nbrEssaisPlus.toString());
@@ -211,7 +226,28 @@ public class Options {
 				logger.debug("lecture du fichier config.properties impossible. Utilisation de valeurs par défaut.");
 			}
 		}
-
+		//pour eviter les mauvaises valeurs rentréées dans le fichier config.properties
+		if (nbrEssaisPlus < 2||nbrEssaisPlus > 20) {
+			nbrEssaisPlus = 10;
+			sauvegardeConfig();
+		}
+		if (nbrEssaisMaster < 2||nbrEssaisMaster > 20) {
+			nbrEssaisMaster = 10;
+			sauvegardeConfig();
+		}
+		if (longueurCodePlus < 2||longueurCodePlus > 9) {
+			longueurCodePlus = 4;
+			sauvegardeConfig();
+		}
+		if (longueurCodeMaster < 2||longueurCodeMaster > 5) {
+			longueurCodeMaster = 4;
+			sauvegardeConfig();
+		}
+		if (nbrCouleursMaster < 4||nbrCouleursMaster > 10) {
+			nbrCouleursMaster = 6;
+			sauvegardeConfig();
+		}
+		
 	}
 
 	/**

@@ -14,6 +14,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import joueurs.Joueur;
 import layout.TableLayout;
 import listener.ChoixCouleurListener;
@@ -28,6 +31,7 @@ import listener.MasterButtonListener;
 public class PlateauMaster extends JPanel implements Plateau {
 
 	private static final long serialVersionUID = 1L;
+	private static final Logger logger = LogManager.getLogger();
 	private int longueurCode;
 	private int taille;
 	private JButton okButton;
@@ -126,6 +130,7 @@ public class PlateauMaster extends JPanel implements Plateau {
 				dev.setVisible(true);
 			}
 		}
+		logger.debug("affichage du message dev : "+msg);
 
 	}
 
@@ -137,7 +142,8 @@ public class PlateauMaster extends JPanel implements Plateau {
 	@Override
 	public void actualiserAffichage() {
 		resultat.removeAll(); // tout effacer pour mieux recommencer !
-		resultat.setSize(longueurCode * 30 + Math.round(longueurCode * 15 / 2), taille * 30);
+		double longueur = longueurCode;
+		resultat.setSize(longueurCode * 30 + ((int) Math.ceil(longueur/2) * 15), taille * 30);
 		double size[][] = new double[2][];// créer un tableau de tailles de case pour le TableLayout
 		size[0] = new double[longueurCode + 1];
 		size[1] = new double[taille];
@@ -148,7 +154,7 @@ public class PlateauMaster extends JPanel implements Plateau {
 			size[1][i] = 30;
 		}
 
-		size[0][longueurCode] = longueurCode * 15 / 2;
+		size[0][longueurCode] = Math.ceil(longueur/2) * 15;
 
 		resultat.setLayout(new TableLayout(size));
 		for (int i = 0; i < tableauJeu.length; i++) {

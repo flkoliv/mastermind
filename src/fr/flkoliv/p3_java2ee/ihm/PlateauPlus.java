@@ -15,6 +15,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import joueurs.Joueur;
 import listener.EntreeListener;
 import listener.OkPlateauListener;
@@ -29,6 +32,7 @@ import listener.OkPlateauListener;
 public class PlateauPlus extends JPanel implements Plateau {
 
 	private static final long serialVersionUID = 1213633100918578601L;
+	private static final Logger logger = LogManager.getLogger();
 	private JTextField jtf;
 	private JButton okButton;
 	private JPanel saisie;
