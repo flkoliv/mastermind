@@ -13,4 +13,5 @@ Vous aurez à développer plusieurs variantes autour de la recherche de combinai
  Pour le compiler, importez le dans eclipse via le menu « File/Import » puis en sélectionnant « Général/Existing project into workspace »
  
  Reconfigurez le chemin d’accès à votre JRE.
-  
+
+un script ANT permet de compiler le projet sous forme de Jar (buildMastermindJar.xml)
