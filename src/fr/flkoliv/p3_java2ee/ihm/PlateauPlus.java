@@ -23,7 +23,6 @@ import listener.EntreeListener;
 import listener.OkPlateauListener;
 
 /**
- * 
  * Plateau de jeu Plus ou Moins
  * 
  * @author flkoliv

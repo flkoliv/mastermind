@@ -1811,7 +1811,6 @@
         <packagedElement xmi:type="uml:Class" xmi:id="_RlKzsKXdEeeDjYR6dLLJHA" name="Joueur" visibility="public" isAbstract="true">
           <generalization xmi:type="uml:Generalization" xmi:id="_RySCoKXdEeeDjYR6dLLJHA" general="_RyKG0KXdEeeDjYR6dLLJHA"/>
           <generalization xmi:type="uml:Generalization" xmi:id="_u0N6MKbBEeeWk8CgXVHYPA" general="_QoT8QKbBEeeWk8CgXVHYPA"/>
-          <ownedAttribute xmi:type="uml:Property" xmi:id="_RyfeAKXdEeeDjYR6dLLJHA" name="adversaire" visibility="protected" type="_RlKzsKXdEeeDjYR6dLLJHA" isUnique="false" aggregation="composite" association="_zp8ZQKXgEeeDjYR6dLLJHA"/>
           <ownedAttribute xmi:type="uml:Property" xmi:id="_Ryk9kKXdEeeDjYR6dLLJHA" name="typeJeu" visibility="protected" type="_RxVAYKXdEeeDjYR6dLLJHA" isUnique="false" aggregation="composite" association="_dH-BIKXgEeeDjYR6dLLJHA"/>
           <ownedAttribute xmi:type="uml:Property" xmi:id="_RynZ0KXdEeeDjYR6dLLJHA" name="plateau" visibility="protected" type="_RvplYKXdEeeDjYR6dLLJHA" isUnique="false" association="_9I18oKXgEeeDjYR6dLLJHA"/>
           <ownedAttribute xmi:type="uml:Property" xmi:id="_RyzAAKXdEeeDjYR6dLLJHA" name="proposition" visibility="protected" type="_RlXA8KXdEeeDjYR6dLLJHA" isUnique="false">
@@ -2027,6 +2026,7 @@
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zp_ckKXgEeeDjYR6dLLJHA"/>
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zp_ckaXgEeeDjYR6dLLJHA" value="1"/>
           </ownedEnd>
+          <ownedEnd xmi:type="uml:Property" xmi:id="_RyfeAKXdEeeDjYR6dLLJHA" name="adversaire" visibility="protected" type="_RlKzsKXdEeeDjYR6dLLJHA" isUnique="false" association="_zp8ZQKXgEeeDjYR6dLLJHA"/>
         </packagedElement>
         <packagedElement xmi:type="uml:Association" xmi:id="_9I18oKXgEeeDjYR6dLLJHA" name="A_plateau_joueur" memberEnd="_RynZ0KXdEeeDjYR6dLLJHA _9I3KwKXgEeeDjYR6dLLJHA">
           <ownedEnd xmi:type="uml:Property" xmi:id="_9I3KwKXgEeeDjYR6dLLJHA" name="joueur" type="_RlKzsKXdEeeDjYR6dLLJHA" association="_9I18oKXgEeeDjYR6dLLJHA">
@@ -2125,4 +2125,5 @@
   <PapyrusJava:External xmi:id="_R32fIKXdEeeDjYR6dLLJHA" name="java.awt.event.ActionEvent" base_Classifier="_R30C4KXdEeeDjYR6dLLJHA"/>
   <PapyrusJava:External xmi:id="_R6PEwKXdEeeDjYR6dLLJHA" name="java.awt.event.MouseListener" base_Classifier="_R6KzUKXdEeeDjYR6dLLJHA"/>
   <PapyrusJava:External xmi:id="_R6xQQKXdEeeDjYR6dLLJHA" name="java.awt.event.MouseEvent" base_Classifier="_R6uM8KXdEeeDjYR6dLLJHA"/>
+  <PapyrusJava:External xmi:id="_nCQCkKoKEee4JpO1YYlF6Q" name="Main" base_Classifier="_RwAxwKXdEeeDjYR6dLLJHA"/>
 </xmi:XMI>
